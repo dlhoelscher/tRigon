@@ -1,0 +1,67 @@
+---
+title: "Session Report - Statistical Tests"
+output: html_document
+params:
+  session_info: NA ,
+  feature_var: NA,
+  group_var: NA,
+  groups: NA,
+  test_selection: NA,
+  stats_output: NA,
+  stats_df: NA,
+  na_omit : NA,
+  na_n: NA
+---
+```{r setup, include=FALSE} 
+knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
+```
+
+```{r, echo=FALSE}
+htmltools::img(src = "tRigon_logo.png",
+               alt = 'logo', 
+               style = 'position:absolute; top:0px; right:135px; height: 80px')
+```
+---
+
+```{r, echo = FALSE}
+params$session_info
+```
+
+feature:
+```{r, echo = FALSE}
+params$feature_var
+```
+
+group variable:
+```{r, echo = FALSE}
+params$group_var
+```
+
+groups:
+```{r, echo = FALSE}
+params$groups
+if (params$na_omit == TRUE) {
+  print(paste0("Warning: group variable contains NAs. ", params$na_n, " values excluded."))
+}
+```
+
+selected statistical test:
+```{r, echo = FALSE}
+if (params$test_selection == "pairwise Wilcoxon-Rank") {
+  print("two-sided pairwise Wilcoxon-Rank test with bonferroni-adjustment for multiple testing")
+} else if (params$test_selection == "bootstrapped CI") {
+  print("500-times bootstrapped confidence intervalls with difference in feature medians between groups")
+} else if (params$test_selection == "Kruskal-Wallis") {
+  print("Kruskal-Wallis one-way analaysis of variance ")
+}
+```
+
+output statistical test:
+```{r, echo = FALSE}
+params$stats_output
+```
+
+output data frame:
+```{r, echo = FALSE}
+knitr::kable(params$stats_df, format="markdown")
+```

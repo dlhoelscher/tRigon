@@ -1,0 +1,31 @@
+# Welcome to tRigon &nbsp;<img src='tRigon_logo.png' align="right" height="200"/>
+
+<b><span style="color:#F17F42">tRigon</span></b> stands for <b><span style="color:#F17F42">toolbox for integrative pathomics analysis</span></b> and provides users with flexible and efficient ways to evaluate and explore (path-) omics datasets. tRigon is built to be compatible with the framework for large-scale histomorphometry (FLASH) environment, but not limited to it.
+
+tRigon offers several key features: 
+  
+(1) processing, aggregating and merging of pathomics files with clinical / experiment metadata for aggregation of highly-dimensional data frames.
+
+(2) evaluating the generated pathomics data using descriptive statistics, multiple types of plots, statistical tests, k-means clustering, feature importance algorithms and correlation analysis.
+
+(3) options for downloading plots, generated data, statistical outputs, as well as experiment reports for each analysis step for reproducibility.
+
+---
+  
+# Workflow
+  
+  The use of tRigon is simple and intuitive. User information are available in the README-file and you can also follow the extensive user guide in the help tab to perform your analysis. 
+
+Demo files for tRigon can be [downloaded here](https://git-ce.rwth-aachen.de/labooratory-ai/flash/-/blob/main/NGM_DataRepository.zip) in the provided data repository.
+
+Code for our framework for large-scale automated histomorphometry (FLASH) to generate pathomics files can also be [accessed here](https://git-ce.rwth-aachen.de/labooratory-ai/flash)
+
+---
+  
+# About tRigon
+  
+tRigon is publicly available in the [CRAN repository](https://cran.r-project.org/web/packages/tRigon/index.html), with source code available on [GitHub](https://git-ce.rwth-aachen.de/labooratory-ai/trigon) under a GPL-3 license. 
+
+The web application can be installed in R / RStudio using a simple command `install.packages("tRigon")`, and run locally with the command `run_tRigon()`. Alternatively, the web application can be freely accessed for direct online use at [https://bcdd.shinyapps.io/tRigon](https://bcdd.shinyapps.io/tRigon/). 
+
+---

@@ -1,0 +1,71 @@
+---
+title: "Session Report - Correlation"
+output: html_document
+params:
+  session_info: NA,
+  corr_method: NA,
+  feature_vars: NA,
+  subgroups_en: NA,
+  group_corr: NA,
+  subgroup_corr: NA,
+  corr_df: NA,
+  corr_plot: NA,
+  warning_data: NA,
+  warning_data_n: NA
+---
+```{r, echo=FALSE}
+htmltools::img(src = "tRigon_logo.png",
+               alt = 'logo', 
+               style = 'position:absolute; top:0px; right:135px; height: 80px')
+```
+---
+
+```{r, echo = FALSE}
+params$session_info
+```
+
+```{r, echo = FALSE}
+if (params$corr_method == "Simple") {
+  print("Simple correlation between two variables.")
+} else if (params$corr_method == "Multiple") {
+  print(paste0("Multiple correlation with ", length(params$feature_vars), " features."))
+}
+```
+
+features:
+```{r, echo = FALSE}
+params$feature_vars
+```
+
+subgroups?
+```{r, echo = FALSE}
+if (params$subgroups_en) {
+  print(paste0("Subgroup analysis is enabled. Chosen grouping variable is ", params$group_corr, " with only analysis of features from ", params$subgroup_corr))
+} else if (params$subgroups_en == FALSE) {
+  print("Subgroup analysis is disabled.")
+}
+```
+
+data missingness:
+```{r, echo = FALSE}
+if (params$warning_data) {
+  print(paste0("Warning: input vectors of unequal length - only complete rows / complete data pairs can be analysed for correlation. ", params$warning_data_n, " rows with missing data excluded."))
+} else {
+  print("no missing data reported.")
+}
+```
+
+correlation data:
+```{r, echo = FALSE}
+if (params$corr_method == "Multiple") {
+  knitr::kable(params$corr_df, format="markdown")
+} else if (params$corr_method == "Simple") {
+  print(paste0("simple correlation Pearson's R: ", params$corr_df[1,3], " p-value: ", params$corr_df[1,4]))
+}
+```
+
+correlation plot:
+<br/>
+```{r dev='png', echo = FALSE}
+plot(params$corr_plot)
+```

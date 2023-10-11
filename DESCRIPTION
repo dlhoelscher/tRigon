@@ -1,0 +1,51 @@
+Package: tRigon
+Title: Toolbox for Integrative Pathomics Analysis
+Version: 0.3.2
+Authors@R: 
+  c(person(given = "David L.",
+           family = "Hoelscher", 
+           role = c("aut", "cre"),
+           email="dhoelscher@ukaachen.de",
+           comment = c(ORCID = "0000-0001-8595-0694")),
+    person(given = "Roman D.",
+           family = "Buelow", 
+           role = c("ctb"),
+           comment = c(ORCID = "0000-0002-8527-7353")),
+    person(given = "Michael",
+           family = "Goedertier", 
+           role = c("ctb")))
+Maintainer: David L. Hoelscher <dhoelscher@ukaachen.de>
+Description: tRigon is a shiny application for the processing and analysis
+    of pathomics and other datasets.  The application serves as a toolbox
+    for descriptive and statistical analyis, correlations, plotting and
+    many other methods for exploratory analysis of high-dimensional
+    datasets.
+License: GPL (>= 3)
+Imports: 
+  boot,
+  caret,
+  data.table,
+  dplyr,
+  DT,
+  factoextra,
+  ggcorrplot,
+  ggplot2,
+  ggpubr,
+  ggridges,
+  markdown,
+  patchwork,
+  randomForest,
+  RColorBrewer,
+  readxl,
+  shiny,
+  shinydashboard,
+  shinydashboardPlus,
+  shinyWidgets,
+  simpleboot,
+  writexl
+Suggests: 
+  knitr
+Encoding: UTF-8
+Language: en-US
+LazyData: true
+RoxygenNote: 7.2.3

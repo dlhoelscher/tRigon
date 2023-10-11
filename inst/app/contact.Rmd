@@ -1,0 +1,23 @@
+# Contact us &nbsp;<img src='tRigon_logo.png' align="right" height="200"/>
+
+To get in contact with our group, please visit: [<b><span style="color:#F17F42">LaBOORatory website</span></b>](https://www.ukaachen.de/kliniken-institute/institut-fuer-pathologie/forschung/labooratory-of-nephropathology/our-interest)
+
+To follow our AI and biostatistics-based projects, please visit: [<b><span style="color:#F17F42">LaBOORatory GitLab</span></b>](https://git-ce.rwth-aachen.de/labooratory-ai)
+
+------
+# Report bugs
+
+To report bugs and/or request features, please use the following GitLab issue channel: 
+  
+[<b><span style="color:#F17F42">https://git-ce.rwth-aachen.de/labooratory-ai/tRigon/-/issues</span></b>](https://git-ce.rwth-aachen.de/labooratory-ai/tRigon/-/issues)
+
+------
+# Citation
+  
+If you find **tRigon** useful, please consider citing our publication:
+  
+Coming soon :)
+
+------
+<a href= 'https://www.ukaachen.de/kliniken-institute/institut-fuer-pathologie/forschung/labooratory-of-nephropathology/our-interest'><img src='LaBOORatory_logo.png' alt='LaBOORatory' title='LaBOORatory Logo' height='66'/></a>
+<a href= 'https://www.rwth-aachen.de/cms/~a/root/?lidx=1'><img src='RWTH_logo.png' alt='RWTH' title='RWTH Logo' height='66'/></a>

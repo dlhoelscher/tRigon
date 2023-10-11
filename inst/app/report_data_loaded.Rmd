@@ -1,0 +1,38 @@
+---
+title: "Session Report - Loading Data"
+output: html_document
+params:
+  session_info: NA,
+  datapath_loadeddf: NA,
+  loaded_df: NA
+---
+```{r, echo=FALSE}
+htmltools::img(src = "tRigon_logo.png",
+               alt = 'logo', 
+               style = 'position:absolute; top:0px; right:135px; height: 80px')
+```
+---
+
+```{r, echo = FALSE}
+params$session_info
+```
+
+file loaded:
+```{r, echo = FALSE}
+params$datapath_loadeddf$name
+```
+
+columns in loaded file:
+```{r, echo = FALSE}
+colnames(params$loaded_df)
+```
+
+n columns in loaded file:
+```{r, echo = FALSE}
+ncol(params$loaded_df)
+```
+
+n rows in loaded file:
+```{r, echo = FALSE}
+nrow(params$loaded_df)
+```

@@ -1,0 +1,87 @@
+---
+title: "Session Report - Data Processing"
+output: html_document
+params:
+  session_info: NA,
+  human_processing_en: NA,
+  calculations_en: NA,
+  datapath_metadata: NA,
+  datapath_processdata: NA,
+  processed_datadf: NA,
+  meta_datadf: NA,
+  matchedID_datadf: NA,
+  n_files: NA
+---
+```{r, echo=FALSE}
+htmltools::img(src = "tRigon_logo.png",
+               alt = 'logo', 
+               style = 'position:absolute; top:0px; right:135px; height: 80px')
+```
+---
+
+```{r, echo = FALSE}
+params$session_info
+```
+
+data input:
+```{r, echo = FALSE}
+if (params$human_processing_en) {
+  print("Human data was processed.")
+} else {
+  print("Mouse data was processed.")
+}
+```
+
+n feature files processed:
+```{r, echo = FALSE}
+params$n_files
+```
+
+feature files processed:
+```{r, echo = FALSE}
+params$datapath_processdata$name
+```
+
+metadata file processed:
+```{r, echo = FALSE}
+params$datapath_metadata$name
+```
+
+columns in metadata file:
+```{r, echo = FALSE}
+colnames(params$meta_datadf)
+```
+
+columns in processed file:
+```{r, echo = FALSE}
+colnames(params$processed_datadf)
+```
+
+feature calculations:
+```{r, echo = FALSE}
+if (params$calculations_en) {
+  print("calculations enabled: keeping calculated columns with mean / median / sd.")
+} else {
+  print("calculations disabled: deleting calculated columns from processed data.")
+}
+```
+
+n columns in processed file:
+```{r, echo = FALSE}
+ncol(params$processed_datadf)
+```
+
+n rows in processed file:
+```{r, echo = FALSE}
+nrow(params$processed_datadf)
+```
+
+matched IDs in feature & clinical files:
+```{r, echo = FALSE}
+if (FALSE %in% params$matchedID_datadf$match) {
+  print("Warning: some IDs did not match!")
+} else {
+  print("All IDs matched!")
+}
+params$matchedID_datadf
+```

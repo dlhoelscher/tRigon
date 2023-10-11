@@ -1,0 +1,65 @@
+---
+title: "Session Report - Plots"
+output: html_document
+params:
+  session_info: NA ,
+  feature_var: NA,
+  group_var: NA,
+  groups: NA,
+  plot_selection: NA,
+  scale: NA,
+  plot: NA,
+  na_omit : NA,
+  na_n: NA
+---
+```{r setup, include=FALSE} 
+knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
+```
+
+```{r, echo=FALSE}
+htmltools::img(src = "tRigon_logo.png",
+               alt = 'logo', 
+               style = 'position:absolute; top:0px; right:135px; height: 80px')
+```
+---
+
+```{r, echo = FALSE}
+params$session_info
+```
+
+feature:
+```{r, echo = FALSE}
+params$feature_var
+```
+
+group variable:
+```{r, echo = FALSE}
+params$group_var
+```
+
+groups:
+```{r, echo = FALSE}
+params$groups
+if (params$na_omit == TRUE) {
+  print(paste0("Warning: group variable contains NAs. ", params$na_n, " values excluded."))
+}
+```
+
+selected plot:
+```{r, echo = FALSE}
+params$plot_selection
+```
+
+plot scale:
+```{r, echo = FALSE}
+if (params$scale == TRUE) {
+  print("Logarithmic-scale is enabled.")
+} else {
+  print("Logarithmic-scale is disabled.")
+}
+```
+
+plot:
+```{r dev='png', echo = FALSE}
+plot(params$plot)
+```

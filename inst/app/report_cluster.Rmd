@@ -1,0 +1,71 @@
+---
+title: "Session Report - k-means Clustering"
+output: html_document
+params:
+  session_info: NA ,
+  feature_vars: NA,
+  clusters_n: NA,
+  groups_en: NA,
+  group_var: NA,
+  groups: NA,
+  cluster_output: NA,
+  cluster_plot: NA,
+  warning_data: NA,
+  warning_data_n: NA
+---
+```{r, echo=FALSE}
+htmltools::img(src = "tRigon_logo.png",
+               alt = 'logo', 
+               style = 'position:absolute; top:0px; right:135px; height: 80px')
+```
+---
+
+```{r, echo = FALSE}
+params$session_info
+```
+
+features:
+```{r, echo = FALSE}
+params$feature_vars
+```
+
+compare groups enabled?
+```{r, echo = FALSE}
+if (params$groups_en == FALSE) {
+  print("Compare groups disabled.")
+} else if (params$groups_en == TRUE) {
+    print("Compare groups enabled.")
+}
+```
+
+```{r, echo = FALSE}
+if (params$groups_en == TRUE) {
+  print(paste0("grouping variable: ", params$group_var))
+}
+``` 
+
+```{r, echo = FALSE}
+if (params$groups_en == TRUE) {
+  params$groups
+}
+```      
+
+data missingness:
+```{r, echo = FALSE}
+if (params$warning_data) {
+  print(paste0("Warning: input vectors of unequal length - only complete rows can be analysed for k-means clustering. ", params$warning_data_n, " rows with missing data excluded."))
+} else {
+  print("no missing data reported.")
+}
+```
+
+cluster output:
+```{r, echo = FALSE}
+params$cluster_output
+```
+
+cluster plot:
+<br/>
+```{r dev='png', echo = FALSE}
+plot(params$cluster_plot)
+```
