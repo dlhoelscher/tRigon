@@ -62,20 +62,7 @@ stats_data <- reactive({
           xi <- df_var[[feature]][as.integer(g) == i]
           xj <- df_var[[feature]][as.integer(g) == j]
           sink("NULL")
-          ind <- c(rep(1, length(xi)), rep(2, length(xj)))
-          boot.func <- function(x, idx) {
-            d1 <- x[idx[ind == 1]]
-            d2 <- x[idx[ind == 2]]
-            fval <- func(d1, ...) - func(d2, ...)
-            b <- two.boot(d1, d2, FUN, R = M, student = FALSE,M = NULL)
-            fval <- c(fval, var(b$t))
-            fval
-          }
-          b <- boot(c(xi, xj), statistic = boot.func, strata = ind)
-          b$student <- student
-          structure(b, class = "simpleboot")
-          browser()
-          #temp_booty <- two.boot(xi, xj, median, student = FALSE, 100, na.rm = TRUE)
+          temp_booty <- two.boot(xi, xj, median, student = FALSE, 100, na.rm = TRUE)
           t <- boot.ci(temp_booty, type = c("basic"))
           temp_boot <- data.frame(0)
           temp_boot$diff <- median(xi, na.rm = TRUE) - median(xj, na.rm = TRUE)
