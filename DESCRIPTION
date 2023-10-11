@@ -15,7 +15,7 @@ Authors@R:
            family = "Goedertier", 
            role = c("ctb")))
 Maintainer: David L. Hoelscher <dhoelscher@ukaachen.de>
-Description: tRigon is a shiny application for the processing and analysis
+Description: 'tRigon' is a shiny application for the processing and analysis
     of pathomics and other datasets.  The application serves as a toolbox
     for descriptive and statistical analyis, correlations, plotting and
     many other methods for exploratory analysis of high-dimensional
@@ -37,9 +37,10 @@ Imports:
   randomForest,
   RColorBrewer,
   readxl,
+  sessioninfo,
   shiny,
-  shinydashboard,
   shinydashboardPlus,
+  shinydashboard,
   shinyWidgets,
   simpleboot,
   writexl

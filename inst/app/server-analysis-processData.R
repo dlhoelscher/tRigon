@@ -8,7 +8,7 @@ metadata_df <- eventReactive(input$preprocessBtn, {
       need(!is.null(input$metaData),"Please select a metadata file to upload")
     )
   } else if (!grepl(".xlsx",input$metaData$datapath)) {
-    showNotification(ui="Selected file must be a .xlsx file",type="error",duration=NULL, closeButton = TRUE) 
+    showNotification(ui="Selected file must be a .xlsx file",type="error",duration=NULL, closeButton = TRUE)
     validate(
       need(grepl(".xlsx",input$metaData$datapath),"Selected file must be a .xlsx file")
     )
@@ -25,7 +25,7 @@ process_df <-  reactive({
   if (input$workflowHuman) {#human workflow based on specimens
     clinical_data <- read_excel(input$metaData$datapath,1)
     if (!("pseudonym" %in% (colnames(clinical_data)))) {
-      showNotification(ui="Meta data format error",type = "error",duration = NULL, closeButton = TRUE) 
+      showNotification(ui="Meta data format error",type = "error",duration = NULL, closeButton = TRUE)
       validate(
         need("pseudonym" %in% (colnames(clinical_data)),"Meta data file does not contain necessary columns to process human data. Did you mean to process mouse data?")
       )
@@ -87,7 +87,7 @@ process_df <-  reactive({
   } else { #mouse workflow based on slide position and individual tissue pieces
     clinical_data <- read_excel(input$metaData$datapath,1)
     if (!("ID" %in% (colnames(clinical_data)) && ("position" %in% (colnames(clinical_data))))) {
-      showNotification(ui="Meta data format error",type = "error",duration = NULL, closeButton = TRUE) 
+      showNotification(ui="Meta data format error",type = "error",duration = NULL, closeButton = TRUE)
       validate(
         need("file" %in% (colnames(clinical_data)),"Meta data file does not contain necessary columns to process mouse data. Did you mean to process human data?")
       )
@@ -106,7 +106,7 @@ process_df <-  reactive({
       l <- lapply(seq_along(my.files), read_df)
       incProgress(3 / 4)
       combined_data <- rbindlist(l, fill=TRUE)
-    }) 
+    })
     withProgress(message = "Merging Data", value=0, {
       incProgress(2 / 10)
       combined_data <- combined_data[ , c("ID", "slidepos") := tstrsplit(combined_data$file, "_")]
@@ -152,9 +152,9 @@ processed_data <- eventReactive(input$preprocessBtn,{
       need(!is.null(input$featureData),"Please select feature data files to upload"),
       need(!is.null(input$metaData),"Please select a metadata file to upload")
     )
-  } 
+  }
   if (TRUE %in% (!(grepl(".csv",input$featureData$datapath) | grepl(".xlsx",input$metaData$datapath)))) {
-    showNotification(ui="Selected feature files must be .csv files, metadata file must be a .xlsx file",type="error",duration=NULL, closeButton = TRUE) 
+    showNotification(ui="Selected feature files must be .csv files, metadata file must be a .xlsx file",type="error",duration=NULL, closeButton = TRUE)
     validate(
       need(grepl(".csv",input$featureData$datapath),"Selected feature files must be .csv files"),
       need(grepl(".xlsx",input$metaData$datapath),"Metadata file must be a .xlsx file")
@@ -213,7 +213,7 @@ observeEvent(input$findfeaturesBtn_processeddata, handlerExpr = {
                       selected = ""
     )
   })
-})    
+})
 
 # download processed dataframe
 output$download_processed <- downloadHandler(
@@ -249,7 +249,7 @@ output$report_processeddata <- downloadHandler(
         file.copy("report_data_processing.Rmd", tempReport, overwrite = FALSE)
         shiny::incProgress(2 / 5)
         # Set up parameters to pass to Rmd document
-        params <- list(session_info = devtools::session_info()$platform,
+        params <- list(session_info = sessioninfo::session_info()$platform,
                        human_processing_en = input$workflowHuman,
                        calculations_en = input$keepCalculations,
                        datapath_metadata = input$metaData,

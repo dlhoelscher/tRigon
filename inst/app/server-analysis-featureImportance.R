@@ -130,7 +130,7 @@ calc_c_fi <- eventReactive(input$compute_c_FiBtn, {
           df_check <- colSums(!is.na(df_check))
           if (length(unique(df_check)) != 1) {
             showNotification(ui = "Unequal vector length - data loss", type = "warning", duration = 3, closeButton = TRUE)
-            rvals$data_warn <- TRUE  
+            rvals$data_warn <- TRUE
             df_check <- df_rf[rowSums(is.na(df_rf)) != ncol(df_rf), ]
             rvals$data_warn_n <- sum(!complete.cases(df_check))
           }
@@ -306,7 +306,7 @@ output$importance_summary <- renderPrint({
   }
 })
 
-# write classification feature importance output 
+# write classification feature importance output
 output_c_fi <- eventReactive(input$compute_c_FiBtn, {
   if (is.null(dim(rvals$rval_loadeddf)) & is.null(dim(rvals$rval_processeddf))) {
     showNotification(ui = "Please load/process data first", type = "error", duration = NULL, closeButton = TRUE)
@@ -385,7 +385,7 @@ rfe_c_data <- reactive({
   df_check <- colSums(!is.na(df_check))
   if (length(unique(df_check)) != 1) {
     showNotification(ui = "Unequal vector length - data loss", type = "warning", duration = 3, closeButton = TRUE)
-    rvals$data_warn <- TRUE 
+    rvals$data_warn <- TRUE
     df_check <- df_rfe[rowSums(is.na(df_rfe)) != ncol(df_rfe), ]
     rvals$data_warn_n <- sum(!complete.cases(df_check))
   }
@@ -467,7 +467,7 @@ output$download_c_fiplot <- downloadHandler(
         }
         shiny::incProgress(5 / 10)
         file.copy(name, file, overwrite = TRUE)
-        setwd(workingdir) 
+        setwd(workingdir)
       }
     )
   }
@@ -488,7 +488,7 @@ output$report_c_fi <- downloadHandler(
         file.copy("report_fi.Rmd", tempReport, overwrite = FALSE)
         shiny::incProgress(2 / 5)
         # Set up parameters to pass to Rmd document
-        params <- list(session_info = devtools::session_info()$platform,
+        params <- list(session_info = sessioninfo::session_info()$platform,
                        feature_vars = input$feature_c_fi_variableSelect,
                        dependent_var = input$dependentVar_c_fi,
                        groups = rvals$groups_lvl,
@@ -949,7 +949,7 @@ output$download_r_fiplot <- downloadHandler(
         }
         shiny::incProgress(5 / 10)
         file.copy(name, file, overwrite = TRUE)
-        setwd(workingdir) 
+        setwd(workingdir)
       }
     )
   }
@@ -970,7 +970,7 @@ output$report_r_fi <- downloadHandler(
         file.copy("report_fi.Rmd", tempReport, overwrite = FALSE)
         shiny::incProgress(2 / 5)
         # Set up parameters to pass to Rmd document
-        params <- list(session_info = devtools::session_info()$platform,
+        params <- list(session_info = sessioninfo::session_info()$platform,
                        feature_vars = input$feature_c_fi_variableSelect,
                        dependent_var = input$dependentVar_c_fi,
                        groups = rvals$groups_lvl,

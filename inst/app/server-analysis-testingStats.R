@@ -266,7 +266,7 @@ output$report_stats <- downloadHandler(
         file.copy("report_stats.Rmd", tempReport, overwrite = FALSE)
         shiny::incProgress(2 / 5)
         # Set up parameters to pass to Rmd document
-        params <- list(session_info = devtools::session_info()$platform,
+        params <- list(session_info = sessioninfo::session_info()$platform,
                        feature_var = input$feature_stats_variableSelect,
                        group_var = input$groupVar_stats,
                        groups = rvals$groups_lvl,

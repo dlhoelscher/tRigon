@@ -197,7 +197,7 @@ output$report_clustering <- downloadHandler(
         file.copy("report_cluster.Rmd", tempReport, overwrite = FALSE)
         shiny::incProgress(2 / 5)
         # Set up parameters to pass to Rmd document
-        params <- list(session_info = devtools::session_info()$platform,
+        params <- list(session_info = sessioninfo::session_info()$platform,
                        feature_vars = input$feature_cluster_variableSelect,
                        clusters_n = input$cluster_n,
                        groups_en = input$cluster_groups_en,

@@ -288,7 +288,7 @@ output$report_s_corr <- downloadHandler(
         file.copy("report_corr.Rmd", tempReport, overwrite = FALSE)
         shiny::incProgress(2 / 5)
         # Set up parameters to pass to Rmd document
-        params <- list(session_info = devtools::session_info()$platform,
+        params <- list(session_info = sessioninfo::session_info()$platform,
                        feature_vars = input$feature_scorr_variableSelect,
                        subgroups_en = input$input_scorr_subgroups,
                        corr_method = input$corr_input,
@@ -559,7 +559,7 @@ output$report_m_corr <- downloadHandler(
         file.copy("report_corr.Rmd", tempReport, overwrite = FALSE)
         shiny::incProgress(2 / 5)
         # Set up parameters to pass to Rmd document
-        params <- list(session_info = devtools::session_info()$platform,
+        params <- list(session_info = sessioninfo::session_info()$platform,
                        feature_vars = input$feature_mcorr_variableSelect,
                        subgroups_en = input$input_mcorr_subgroups,
                        corr_method = input$corr_input,

@@ -94,8 +94,8 @@ output$report_loadeddata <- downloadHandler(
         file.copy("report_data_loaded.Rmd", tempReport, overwrite = FALSE)
         shiny::incProgress(2 / 5)
         # Set up parameters to pass to Rmd document
-        params <- list(session_info = devtools::session_info()$platform,
-                       datapath_loadeddf = input$preprocData, 
+        params <- list(session_info = sessioninfo::session_info()$platform,
+                       datapath_loadeddf = input$preprocData,
                        loaded_df = rvals$rval_loadeddf)
         shiny::incProgress(3 / 5)
         rmarkdown::render(tempReport, output_file = file,

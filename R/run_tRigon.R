@@ -1,10 +1,20 @@
 #' @title Run tRigon application
 #' @description Run tRigon application
 #' @author David Hoelscher
-#' @import boot caret data.table dplyr DT ggcorrplot ggplot2 ggpubr markdown patchwork randomForest RColorBrewer readxl shiny shinydashboard shinydashboardPlus shinyWidgets writexl
+#' @rawNamespace import(shinydashboard, except = c(dashboardPage, dashboardSidebar))
+#' @rawNamespace import(shiny, except = renderDataTable)
+#' @import boot caret dplyr ggcorrplot ggplot2 markdown patchwork RColorBrewer readxl shinyWidgets writexl
 #' @importFrom ggridges geom_density_ridges theme_ridges
 #' @importFrom simpleboot two.boot
 #' @importFrom factoextra fviz
+#' @importFrom DT renderDataTable
+#' @importFrom data.table fread
+#' @importFrom data.table rbindlist
+#' @importFrom randomForest randomForest
+#' @importFrom shinydashboardPlus dashboardPage
+#' @importFrom shinydashboardPlus dashboardSidebar
+#' @importFrom ggpubr stat_cor
+#' @importFrom sessioninfo session_info
 #' @export
 #' @return app
 #' @examples
