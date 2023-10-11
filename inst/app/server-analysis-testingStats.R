@@ -61,7 +61,7 @@ stats_data <- reactive({
         compare.levels <- function(i, j) {
           xi <- df_var[[feature]][as.integer(g) == i]
           xj <- df_var[[feature]][as.integer(g) == j]
-          sink("NUL")
+          sink("NULL")
           ind <- c(rep(1, length(xi)), rep(2, length(xj)))
           boot.func <- function(x, idx) {
             d1 <- x[idx[ind == 1]]
