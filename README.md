@@ -34,7 +34,7 @@ Alternatively, you can access tRigon online via [https://bcdd.shinyapps.io/tRigo
 
 3. **Demo Data**
 
-FLASH-generated pathomics demo files have been provided. Please use this [link to access](https://git-ce.rwth-aachen.de/labooratory-ai/flash/-/blob/main/NGM_DataRepository.zip) the demo data.
+FLASH-generated pathomics demo files for five human and mouse datasets as well as three non-pathomics medical datasets have been provided. Please use this [link to access](https://git-ce.rwth-aachen.de/labooratory-ai/flash/-/blob/main/NGM_DataRepository.zip) the demo data.
 
 ## 4. Main Functions
 
