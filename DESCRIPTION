@@ -15,11 +15,9 @@ Authors@R:
            family = "Goedertier", 
            role = c("ctb")))
 Maintainer: David L. Hoelscher <dhoelscher@ukaachen.de>
-Description: 'tRigon' is a shiny application for the processing and analysis
-    of pathomics and other datasets.  The application serves as a toolbox
-    for descriptive and statistical analyis, correlations, plotting and
-    many other methods for exploratory analysis of high-dimensional
-    datasets.
+Description: Processing and analysis of pathomics, omics and other medical datasets.
+    'tRigon' serves as a toolbox for descriptive and statistical analysis, correlations, 
+    plotting and many other methods for exploratory analysis of highly-dimensional datasets.
 License: GPL (>= 3)
 Imports: 
   boot (>= 1.3-28),
