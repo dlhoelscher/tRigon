@@ -108,10 +108,18 @@ process_df <-  reactive({
       combined_data <- rbindlist(l, fill=TRUE)
     })
     withProgress(message = "Merging Data", value=0, {
-      incProgress(2 / 10)
-      combined_data <- combined_data[ , c("ID", "slidepos") := tstrsplit(combined_data$file, "_")]
-      combined_data <- combined_data %>% dplyr::select(file, ID, slidepos,everything())
+      combined_data <- combined_data[ , paste0("file_V", 1:max(sapply(spl <- strsplit(combined_data$file, "_"), length))) := transpose(spl)][]
+      n_slidepos <- paste0("file_V", max(sapply(spl <- strsplit(combined_data$file, "_"), length)))
       incProgress(3 / 10)
+      clinical_data <- read_excel(input$metaData$datapath,1)
+      rvals$rval_metadatadf <- clinical_data
+      col_clinical <- colnames(clinical_data)
+      incProgress(4 / 10)
+      col_clinical <- col_clinical[! col_clinical %in% c("ID")]
+      col_clinical <- col_clinical[! col_clinical %in% c("position")]
+      incProgress(5 / 10)
+      combined_data <- combined_data %>% rename (slidepos = n_slidepos)
+      combined_data <- combined_data %>% dplyr::select(file, slidepos,everything())
       #drop summary columns if keeping them is disabled
       if (input$keepCalculations == FALSE) {
         combined_data <- dplyr::select(combined_data, -contains("MEAN"))
@@ -120,16 +128,17 @@ process_df <-  reactive({
       }
       # replace artificial -1 values with NA
       combined_data[combined_data == -1] <- NA
-      incProgress(4 / 10)
+      incProgress(6 / 10)
       #merge features with clinical information (genotype, experiment, etc.)
-      rvals$rval_metadatadf <- clinical_data
+      incProgress(7 / 10)
       clinical_data$file <- paste(clinical_data$ID, clinical_data$position, sep = "_")
-      incProgress(5 / 10)
       clinical_data <- clinical_data %>% dplyr::select(-ID, -position)
       feature_analysis <- merge(combined_data, clinical_data, by = "file")
+      feature_analysis <- feature_analysis %>% select(-contains("file_V"))
+      feature_analysis <- feature_analysis %>% select(file, col_clinical, everything())
       rval_ID_metadata = length(unique(clinical_data$file))
       rval_ID_feature = length(unique(combined_data$file))
-      incProgress(7 / 10)
+      incProgress(8 / 10)
       clinicalID_df <- data.frame(file = c(unique(clinical_data$file)))
       featureID_df <- data.frame(file = c(unique(combined_data$file)))
       clinicalID_df$match <- clinicalID_df$file %in% featureID_df$file
@@ -249,7 +258,7 @@ output$report_processeddata <- downloadHandler(
         file.copy("report_data_processing.Rmd", tempReport, overwrite = FALSE)
         shiny::incProgress(2 / 5)
         # Set up parameters to pass to Rmd document
-        params <- list(session_info = sessioninfo::session_info()$platform,
+        params <- list(session_info = devtools::session_info()$platform,
                        human_processing_en = input$workflowHuman,
                        calculations_en = input$keepCalculations,
                        datapath_metadata = input$metaData,
