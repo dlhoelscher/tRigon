@@ -24,7 +24,7 @@ Code for our framework for large-scale automated histomorphometry (FLASH) to gen
   
 # About tRigon
   
-tRigon is publicly available in the [CRAN repository](https://cran.r-project.org/web/packages/tRigon/index.html), with source code available on [GitHub](https://git-ce.rwth-aachen.de/labooratory-ai/trigon) under a GPL-3 license. 
+tRigon is publicly available in the [CRAN repository](https://cran.r-project.org/web/packages/tRigon/index.html), with source code available on [GitLab](https://git-ce.rwth-aachen.de/labooratory-ai/trigon) under a GPL-3 license. 
 
 The web application can be installed in R / RStudio using a simple command `install.packages("tRigon")`, and run locally with the command `run_tRigon()`. Alternatively, the web application can be freely accessed for direct online use at [https://bcdd.shinyapps.io/tRigon](https://bcdd.shinyapps.io/tRigon/). 
 
