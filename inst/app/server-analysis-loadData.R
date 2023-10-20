@@ -22,7 +22,7 @@ loaded_df <- eventReactive(input$loaddataBtn, {
         rvals$rval_loadeddf <- read_excel(input$preprocData$datapath)
       }
       incProgress(2 / 3)
-      names(rvals$rval_loadeddf) <- names(rvals$rval_loadeddf) %>%  make.names()
+      names(rvals$rval_loadeddf) <- names(rvals$rval_loadeddf) %>% make.names()
       names(rvals$rval_loadeddf) <- sub("%", "", names(rvals$rval_loadeddf))
       rvals$rval_loadeddf
     })
@@ -32,49 +32,50 @@ loaded_df <- eventReactive(input$loaddataBtn, {
 # output loaded table
 output$LoadedDataTable <- DT::renderDataTable(loaded_df())
 
-#find features in loaded data
+# find features in loaded data
 observeEvent(input$findfeaturesBtn_loadeddata, handlerExpr = {
   df_loaded <- rvals$rval_loadeddf
   if (is.null(dim(df_loaded))) {
     showNotification(ui = "Please load data before finding features", type = "error", duration = NULL, closeButton = TRUE)
     validate(
       need(!is.null(dim(df_loaded)), "Please load a data file before finding features")
-    )}
+    )
+  }
   rvals$rval_chosendf <- "loaded"
   withProgress(message = "Finding Features", value = 0, {
     incProgress(3 / 6)
     Sys.sleep(1)
     updatePickerInput(session, "feature_ds_variableSelect",
-                      choices = sort(names(loaded_df())),
-                      selected = ""
+      choices = sort(names(loaded_df())),
+      selected = ""
     )
     updatePickerInput(session, "feature_p_variableSelect",
-                      choices = sort(names(loaded_df())),
-                      selected = ""
+      choices = sort(names(loaded_df())),
+      selected = ""
     )
     updatePickerInput(session, "feature_stats_variableSelect",
-                      choices = sort(names(loaded_df())),
-                      selected = ""
+      choices = sort(names(loaded_df())),
+      selected = ""
     )
     updatePickerInput(session, "feature_cluster_variableSelect",
-                      choices = sort(names(loaded_df())),
-                      selected = ""
+      choices = sort(names(loaded_df())),
+      selected = ""
     )
     updatePickerInput(session, "feature_c_fi_variableSelect",
-                      choices = sort(names(loaded_df())),
-                      selected = ""
+      choices = sort(names(loaded_df())),
+      selected = ""
     )
     updatePickerInput(session, "feature_r_fi_variableSelect",
-                      choices = sort(names(loaded_df())),
-                      selected = ""
+      choices = sort(names(loaded_df())),
+      selected = ""
     )
     updatePickerInput(session, "feature_scorr_variableSelect",
-                      choices = sort(names(loaded_df())),
-                      selected = ""
+      choices = sort(names(loaded_df())),
+      selected = ""
     )
     updatePickerInput(session, "feature_mcorr_variableSelect",
-                      choices = sort(names(loaded_df())),
-                      selected = ""
+      choices = sort(names(loaded_df())),
+      selected = ""
     )
   })
 })
@@ -94,13 +95,17 @@ output$report_loadeddata <- downloadHandler(
         file.copy("report_data_loaded.Rmd", tempReport, overwrite = FALSE)
         shiny::incProgress(2 / 5)
         # Set up parameters to pass to Rmd document
-        params <- list(session_info = sessioninfo::session_info()$platform,
-                       datapath_loadeddf = input$preprocData,
-                       loaded_df = rvals$rval_loadeddf)
+        params <- list(
+          session_info = sessioninfo::session_info()$platform,
+          datapath_loadeddf = input$preprocData,
+          loaded_df = rvals$rval_loadeddf
+        )
         shiny::incProgress(3 / 5)
-        rmarkdown::render(tempReport, output_file = file,
-                          params = params,
-                          envir = new.env(parent = globalenv()))
+        rmarkdown::render(tempReport,
+          output_file = file,
+          params = params,
+          envir = new.env(parent = globalenv())
+        )
         shiny::incProgress(4 / 5)
       }
     )

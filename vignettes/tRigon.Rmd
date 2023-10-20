@@ -19,7 +19,7 @@ To facilitate pathomics data analysis and interpretation as well as support a br
 
 ## Installation
 
-Users  need to have the R enviroment and optionally RStudio installed. You can download both [here](https://posit.co/download/rstudio-desktop/). 
+Users  need to have the R environment and optionally RStudio installed. You can download both [here](https://posit.co/download/rstudio-desktop/). 
 
 Next you can run the following code to install tRigon.
 

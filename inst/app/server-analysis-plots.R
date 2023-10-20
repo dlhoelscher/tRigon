@@ -1,6 +1,6 @@
 # plots
 
-#create input data and choose plot
+# create input data and choose plot
 plot_data <- reactive({
   withProgress(message = "Plotting", value = 0, {
     incProgress(1 / 6)
@@ -37,7 +37,8 @@ plot_data <- reactive({
       )
     }
     obs_groups <- df_var %>%
-      group_by_at(group_col) %>% count()
+      group_by_at(group_col) %>%
+      count()
     if (any(obs_groups$n == 1)) {
       showNotification(ui = "Warning: only one observation in group", type = "warning", duration = 3, closeButton = TRUE)
     }
@@ -48,7 +49,7 @@ plot_data <- reactive({
       df_na <- df_na[which(!is.na(df_na[[feature]])), ]
       rvals$n_na <- count(df_na)
       g <- na.omit(g)
-      df_var <- df_var[!is.na(df_var[[group_col]]),]
+      df_var <- df_var[!is.na(df_var[[group_col]]), ]
     } else {
       rvals$na_omit <- FALSE
       rvals$n_na <- 0
@@ -59,9 +60,9 @@ plot_data <- reactive({
         df_var <- subset(df_var, df_var[[feature]] > 0)
         n_groups <- length(unique(df_var[[group_col]]))
         if (n_groups > 12) {
-          group_colors = sample(col_vector, n_groups)
+          group_colors <- sample(col_vector, n_groups)
         } else {
-          group_colors = my_palette
+          group_colors <- my_palette
         }
         df_var[[group_col]] <- as.factor(df_var[[group_col]])
         n <- nrow(df_var[!is.na(df_var[[feature]]), ])
@@ -90,9 +91,9 @@ plot_data <- reactive({
         df_var <- subset(df_var, df_var[[feature]] > 0)
         n_groups <- length(unique(df_var[[group_col]]))
         if (n_groups > 12) {
-          group_colors = sample(col_vector, n_groups)
+          group_colors <- sample(col_vector, n_groups)
         } else {
-          group_colors = my_palette
+          group_colors <- my_palette
         }
         df_var[[group_col]] <- as.factor(df_var[[group_col]])
         n <- nrow(df_var[!is.na(df_var[[feature]]), ])
@@ -121,9 +122,9 @@ plot_data <- reactive({
         df_var <- subset(df_var, df_var[[feature]] > 0)
         n_groups <- length(unique(df_var[[group_col]]))
         if (n_groups > 12) {
-          group_colors = sample(col_vector, n_groups)
+          group_colors <- sample(col_vector, n_groups)
         } else {
-          group_colors = my_palette
+          group_colors <- my_palette
         }
         df_var[[group_col]] <- as.factor(df_var[[group_col]])
         n <- nrow(df_var[!is.na(df_var[[feature]]), ])
@@ -153,9 +154,9 @@ plot_data <- reactive({
         df_var <- subset(df_var, df_var[[feature]] > 0)
         n_groups <- length(unique(df_var[[group_col]]))
         if (n_groups > 12) {
-          group_colors = sample(col_vector, n_groups)
+          group_colors <- sample(col_vector, n_groups)
         } else {
-          group_colors = my_palette
+          group_colors <- my_palette
         }
         df_var[[group_col]] <- as.factor(df_var[[group_col]])
         n <- nrow(df_var[!is.na(df_var[[feature]]), ])
@@ -185,9 +186,9 @@ plot_data <- reactive({
       if (plot == "Violin plot") {
         n_groups <- length(unique(df_var[[group_col]]))
         if (n_groups > 12) {
-          group_colors = sample(col_vector, n_groups)
+          group_colors <- sample(col_vector, n_groups)
         } else {
-          group_colors = my_palette
+          group_colors <- my_palette
         }
         df_var[[group_col]] <- as.factor(df_var[[group_col]])
         n <- nrow(df_var[!is.na(df_var[[feature]]), ])
@@ -214,9 +215,9 @@ plot_data <- reactive({
       if (plot == "Boxplot") {
         n_groups <- length(unique(df_var[[group_col]]))
         if (n_groups > 12) {
-          group_colors = sample(col_vector, n_groups)
+          group_colors <- sample(col_vector, n_groups)
         } else {
-          group_colors = my_palette
+          group_colors <- my_palette
         }
         df_var[[group_col]] <- as.factor(df_var[[group_col]])
         n <- nrow(df_var[!is.na(df_var[[feature]]), ])
@@ -243,9 +244,9 @@ plot_data <- reactive({
       if (plot == "Violin with Boxplot") {
         n_groups <- length(unique(df_var[[group_col]]))
         if (n_groups > 12) {
-          group_colors = sample(col_vector, n_groups)
+          group_colors <- sample(col_vector, n_groups)
         } else {
-          group_colors = my_palette
+          group_colors <- my_palette
         }
         df_var[[group_col]] <- as.factor(df_var[[group_col]])
         n <- nrow(df_var[!is.na(df_var[[feature]]), ])
@@ -273,9 +274,9 @@ plot_data <- reactive({
       if (plot == "Ridgeline") {
         n_groups <- length(unique(df_var[[group_col]]))
         if (n_groups > 12) {
-          group_colors = sample(col_vector, n_groups)
+          group_colors <- sample(col_vector, n_groups)
         } else {
-          group_colors = my_palette
+          group_colors <- my_palette
         }
         df_var[[group_col]] <- as.factor(df_var[[group_col]])
         n <- nrow(df_var[!is.na(df_var[[feature]]), ])
@@ -374,7 +375,7 @@ output$download_plot <- downloadHandler(
       {
         shiny::incProgress(1 / 10)
         Sys.sleep(1)
-        workingdir = getwd()
+        workingdir <- getwd()
         setwd(tempdir())
         name <- paste(input$p_PlotSelect, "_", input$feature_p_variableSelect, ".png", sep = "")
         shiny::incProgress(5 / 10)
@@ -400,19 +401,23 @@ output$report_plot <- downloadHandler(
         file.copy("report_plot.Rmd", tempReport, overwrite = FALSE)
         shiny::incProgress(2 / 5)
         # Set up parameters to pass to Rmd document
-        params <- list(session_info = sessioninfo::session_info()$platform,
-                       feature_var = input$feature_p_variableSelect,
-                       group_var = input$groupVar_p,
-                       groups = rvals$groups_lvl,
-                       plot_selection = input$p_PlotSelect,
-                       scale = input$logscale_switch,
-                       plot = rvals$rval_plot,
-                       na_omit = rvals$na_omit,
-                       na_n = rvals$n_na)
+        params <- list(
+          session_info = sessioninfo::session_info()$platform,
+          feature_var = input$feature_p_variableSelect,
+          group_var = input$groupVar_p,
+          groups = rvals$groups_lvl,
+          plot_selection = input$p_PlotSelect,
+          scale = input$logscale_switch,
+          plot = rvals$rval_plot,
+          na_omit = rvals$na_omit,
+          na_n = rvals$n_na
+        )
         shiny::incProgress(3 / 5)
-        rmarkdown::render(tempReport, output_file = file,
-                          params = params,
-                          envir = new.env(parent = globalenv()))
+        rmarkdown::render(tempReport,
+          output_file = file,
+          params = params,
+          envir = new.env(parent = globalenv())
+        )
         shiny::incProgress(4 / 5)
       }
     )

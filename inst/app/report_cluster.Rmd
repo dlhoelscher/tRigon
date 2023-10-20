@@ -14,9 +14,11 @@ params:
   warning_data_n: NA
 ---
 ```{r, echo=FALSE}
-htmltools::img(src = "tRigon_logo.png",
-               alt = 'logo', 
-               style = 'position:absolute; top:0px; right:135px; height: 80px')
+htmltools::img(
+  src = "tRigon_logo.png",
+  alt = "logo",
+  style = "position:absolute; top:0px; right:135px; height: 80px"
+)
 ```
 ---
 
@@ -34,7 +36,7 @@ compare groups enabled?
 if (params$groups_en == FALSE) {
   print("Compare groups disabled.")
 } else if (params$groups_en == TRUE) {
-    print("Compare groups enabled.")
+  print("Compare groups enabled.")
 }
 ```
 
@@ -53,7 +55,9 @@ if (params$groups_en == TRUE) {
 data missingness:
 ```{r, echo = FALSE}
 if (params$warning_data) {
-  print(paste0("Warning: input vectors of unequal length - only complete rows can be analysed for k-means clustering. ", params$warning_data_n, " rows with missing data excluded."))
+  print(paste0(
+    "Warning: input vectors of unequal length - only complete rows can be analysed for k-means clustering. ", params$warning_data_n, " rows with missing data excluded."
+  ))
 } else {
   print("no missing data reported.")
 }

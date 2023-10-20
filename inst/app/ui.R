@@ -7,12 +7,15 @@ ui <- shinydashboardPlus::dashboardPage(
 
   ## header
   header = dashboardHeader(
-    tags$li(class = "dropdown",
-            tags$style(".main-header .navbar {margin-left: 200px; !important}
-                  .main-header .logo {width: 200px; !important}")),
+    tags$li(
+      class = "dropdown",
+      tags$style(".main-header .navbar {margin-left: 200px; !important}
+                  .main-header .logo {width: 200px; !important}")
+    ),
     title = tagList(
       span(class = "logo-lg", strong("tRigon v0.3", style = "position: relative; right: 20px")),
-      img(class = "logo-mini", src = "tRigon_icon.png", width = "230%", style = "position: relative; bottom: 1px; position: relative; left: 3px"))
+      img(class = "logo-mini", src = "tRigon_icon.png", width = "230%", style = "position: relative; bottom: 1px; position: relative; left: 3px")
+    )
   ),
 
   ## sidebar
@@ -20,15 +23,16 @@ ui <- shinydashboardPlus::dashboardPage(
     id = "sidebarmenu", width = 200,
     sidebarMenu(
       menuItem(text = strong("Home", style = "position: relative; left: 3px"), tabName = "home", icon = icon("home")),
-      menuItem(text = strong("Analysis", style = "position: relative; left: 9px"), tabName = "analysis", startExpanded = FALSE, icon = icon("calculator", style = "position: relative; left: 2px"),
-               menuSubItem("Processing", tabName = "processData", icon = icon("angle-right")),
-               menuSubItem("Load Data", tabName = "loadData", icon = icon("angle-right")),
-               menuSubItem("Feature Summary", tabName = "descriptiveStats", icon = icon("angle-right")),
-               menuSubItem("Plots", tabName = "plots", icon = icon("angle-right")),
-               menuSubItem("Statistical Tests", tabName = "testingStats", icon = icon("angle-right")),
-               menuSubItem("Clustering", tabName = "clustering", icon = icon("angle-right")),
-               menuSubItem("Feature Importance", tabName = "featureImportance", icon = icon("angle-right")),
-               menuSubItem("Correlation", tabName = "correlation", icon = icon("angle-right"))
+      menuItem(
+        text = strong("Analysis", style = "position: relative; left: 9px"), tabName = "analysis", startExpanded = FALSE, icon = icon("calculator", style = "position: relative; left: 2px"),
+        menuSubItem("Processing", tabName = "processData", icon = icon("angle-right")),
+        menuSubItem("Load Data", tabName = "loadData", icon = icon("angle-right")),
+        menuSubItem("Feature Summary", tabName = "descriptiveStats", icon = icon("angle-right")),
+        menuSubItem("Plots", tabName = "plots", icon = icon("angle-right")),
+        menuSubItem("Statistical Tests", tabName = "testingStats", icon = icon("angle-right")),
+        menuSubItem("Clustering", tabName = "clustering", icon = icon("angle-right")),
+        menuSubItem("Feature Importance", tabName = "featureImportance", icon = icon("angle-right")),
+        menuSubItem("Correlation", tabName = "correlation", icon = icon("angle-right"))
       ),
       menuItem(text = strong("Settings", style = "position: relative; left: 5px"), tabName = "settings", icon = icon("cog")),
       menuItem(text = strong("Help", style = "position: relative; left: 10px"), tabName = "help", icon = icon("question", style = "position: relative; left: 2px")),

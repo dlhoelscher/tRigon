@@ -1,6 +1,8 @@
 settings_page <- fluidRow(
-  column(width = 12, title = "Settings",
-    box(width = NULL, title = "Settings",
+  column(
+    width = 12, title = "Settings",
+    box(
+      width = NULL, title = "Settings",
       div(style = "margin-top: -10px;"),
       tags$h4("Processing Mode (mouse / human):"),
       materialSwitch(inputId = "workflowHuman", label = "Human data workflow"),

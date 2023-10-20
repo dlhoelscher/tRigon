@@ -1,6 +1,8 @@
 plots <- fluidRow(
-  column(width = 4,
-    shinydashboard::box(title = "Plots", width = NULL,
+  column(
+    width = 4,
+    shinydashboard::box(
+      title = "Plots", width = NULL,
       div(style = "margin-top: -10px;"),
       # Input for selecting which variable to plot
       pickerInput(
@@ -8,7 +10,8 @@ plots <- fluidRow(
         label = "Select features",
         choices = "... no features found",
         options = list(
-          'live-search'=TRUE), 
+          "live-search" = TRUE
+        ),
         multiple = FALSE
       ),
       # Grouping variable input
@@ -28,8 +31,10 @@ plots <- fluidRow(
       downloadButton("report_plot", "Save Report")
     )
   ),
-  column(width = 8,
-    shinydashboard::box(title = "Feature Plot", width = NULL,
+  column(
+    width = 8,
+    shinydashboard::box(
+      title = "Feature Plot", width = NULL,
       # Output for displaying plots"
       fluid = TRUE,
       plotOutput("Feature_Plot")

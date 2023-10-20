@@ -1,6 +1,6 @@
 # statistical tests
 
-#perform statistical test
+# perform statistical test
 stats_data <- reactive({
   withProgress(message = "Calculating", value = 0, {
     suppressWarnings({
@@ -42,7 +42,7 @@ stats_data <- reactive({
         df_na <- df_na[which(!is.na(df_na[[feature]])), ]
         rvals$n_na <- count(df_na)
         g <- na.omit(g)
-        df_var <- df_var[!is.na(df_var[[group_col]]),]
+        df_var <- df_var[!is.na(df_var[[group_col]]), ]
       } else {
         rvals$na_omit <- FALSE
         rvals$n_na <- 0
@@ -253,19 +253,23 @@ output$report_stats <- downloadHandler(
         file.copy("report_stats.Rmd", tempReport, overwrite = FALSE)
         shiny::incProgress(2 / 5)
         # Set up parameters to pass to Rmd document
-        params <- list(session_info = sessioninfo::session_info()$platform,
-                       feature_var = input$feature_stats_variableSelect,
-                       group_var = input$groupVar_stats,
-                       groups = rvals$groups_lvl,
-                       test_selection = input$select_test,
-                       stats_output = rvals$rval_calc,
-                       stats_df = rvals$rval_calcdf,
-                       na_omit = rvals$na_omit,
-                       na_n = rvals$n_na)
+        params <- list(
+          session_info = sessioninfo::session_info()$platform,
+          feature_var = input$feature_stats_variableSelect,
+          group_var = input$groupVar_stats,
+          groups = rvals$groups_lvl,
+          test_selection = input$select_test,
+          stats_output = rvals$rval_calc,
+          stats_df = rvals$rval_calcdf,
+          na_omit = rvals$na_omit,
+          na_n = rvals$n_na
+        )
         shiny::incProgress(3 / 5)
-        rmarkdown::render(tempReport, output_file = file,
-                          params = params,
-                          envir = new.env(parent = globalenv()))
+        rmarkdown::render(tempReport,
+          output_file = file,
+          params = params,
+          envir = new.env(parent = globalenv())
+        )
         shiny::incProgress(4 / 5)
       }
     )

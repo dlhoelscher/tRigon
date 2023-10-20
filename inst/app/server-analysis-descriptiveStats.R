@@ -3,7 +3,7 @@
 # calculate summary statistics
 ds_data <- reactive({
   withProgress(message = "Calculating", value = 0, {
-    var = c(input$feature_ds_variableSelect, input$groupVar_ds)
+    var <- c(input$feature_ds_variableSelect, input$groupVar_ds)
     feature <- c(input$feature_ds_variableSelect)
     df_loaded <- rvals$rval_loadeddf
     df_processed <- rvals$rval_processeddf
@@ -31,7 +31,7 @@ ds_data <- reactive({
       df_na <- df_na[which(!is.na(df_na[[feature]])), ]
       rvals$n_na <- count(df_na)
       g <- na.omit(g)
-      df_var <- df_var[!is.na(df_var[[group_col]]),]
+      df_var <- df_var[!is.na(df_var[[group_col]]), ]
     } else {
       rvals$na_omit <- FALSE
       rvals$n_na <- 0
@@ -56,7 +56,9 @@ ds_data <- reactive({
       temp_stats$var <- var(group_df[[feature]], na.rm = TRUE)
       temp_stats$sd <- sd(group_df[[feature]], na.rm = TRUE)
       temp_stats$iqr <- IQR((group_df[[feature]]), na.rm = TRUE)
-      n_datapoints <- group_df %>% filter(!is.na(group_df[[feature]])) %>% count()
+      n_datapoints <- group_df %>%
+        filter(!is.na(group_df[[feature]])) %>%
+        count()
       temp_stats$n_datapoints <- n_datapoints$n
       temp_stats$group_factor <- group_factor
       temp_stats <- as.data.frame(temp_stats) %>% dplyr::select(group_factor, Min., X1st.Qu., Median, Mean, X3rd.Qu., Max., var, sd, iqr, n_datapoints)
@@ -69,7 +71,7 @@ ds_data <- reactive({
     summary_stats <- summary_stats %>% dplyr::select(group, feature, median, mean, var, sd, min, max, Q1, Q3, iqr, n_datapoints)
     summary_stats[, c(3:11)] <- sapply(summary_stats[, c(3:11)], as.numeric)
     summary_stats <- summary_stats %>% mutate_if(is.numeric, ~ round(., 2))
-    summary_stats <-  summary_stats %>% rename_at(1, ~ input$groupVar_ds)
+    summary_stats <- summary_stats %>% rename_at(1, ~ input$groupVar_ds)
     summary_stats
   })
   rvals$rval_dsdf <- summary_stats
@@ -155,17 +157,21 @@ output$report_ds <- downloadHandler(
         file.copy("report_ds.Rmd", tempReport, overwrite = FALSE)
         shiny::incProgress(2 / 5)
         # Set up parameters to pass to Rmd document
-        params <- list(session_info = sessioninfo::session_info()$platform,
-                       feature_var = input$feature_ds_variableSelect,
-                       group_var = input$groupVar_ds,
-                       groups = rvals$groups_lvl,
-                       ds_df = rvals$rval_dsdf,
-                       na_omit = rvals$na_omit,
-                       na_n = rvals$n_na)
+        params <- list(
+          session_info = sessioninfo::session_info()$platform,
+          feature_var = input$feature_ds_variableSelect,
+          group_var = input$groupVar_ds,
+          groups = rvals$groups_lvl,
+          ds_df = rvals$rval_dsdf,
+          na_omit = rvals$na_omit,
+          na_n = rvals$n_na
+        )
         shiny::incProgress(3 / 5)
-        rmarkdown::render(tempReport, output_file = file,
-                          params = params,
-                          envir = new.env(parent = globalenv()))
+        rmarkdown::render(tempReport,
+          output_file = file,
+          params = params,
+          envir = new.env(parent = globalenv())
+        )
         shiny::incProgress(4 / 5)
       }
     )

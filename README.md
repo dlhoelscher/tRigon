@@ -2,8 +2,8 @@
 
 ## 1. Introduction
 
-[![CRAN status](http://www.r-pkg.org/badges/version/RawHummus)](https://cran.r-project.org/package=RawHummus) 
-[![CRAN downloads](http://cranlogs.r-pkg.org/badges/grand-total/RawHummus)](https://cran.r-project.org/package=RawHummus)
+[![CRAN status](http://www.r-pkg.org/badges/version/tRigon)](https://cran.r-project.org/package=tRigon) 
+[![CRAN downloads](http://cranlogs.r-pkg.org/badges/grand-total/tRigon)](https://cran.r-project.org/package=tRigon)
 
 
 `tRigon - toolbox for integrative pathomics analysis` is a Shiny-based application for automated, simple and reproducible analysis of (path-) omics datasets. 
@@ -58,7 +58,7 @@ FLASH-generated pathomics demo files for five human and mouse datasets as well a
 
 ## 5. How to cite
 
-If you find tRigon usful, please consider citing the publication:
+If you find tRigon useful, please consider citing the publication:
 
 - [David L. Hölscher, Michael Goedertier, Barbara M. Klinkhammer, Patrick Droste, Ivan G. Costa, Peter Boor, Roman D. Bülow]
 

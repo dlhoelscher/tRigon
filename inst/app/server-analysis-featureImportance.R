@@ -93,7 +93,7 @@ calc_c_fi <- eventReactive(input$compute_c_FiBtn, {
       df_na <- as.data.frame(subset(df_na, select = c(features)))
       rvals$n_na <- count(df_na[complete.cases(df_na), ])
       g <- na.omit(g)
-      df_var <- df_var[!is.na(df_var[[group_col]]),]
+      df_var <- df_var[!is.na(df_var[[group_col]]), ]
     } else {
       rvals$na_omit <- FALSE
       rvals$n_na <- 0
@@ -122,7 +122,7 @@ calc_c_fi <- eventReactive(input$compute_c_FiBtn, {
             showNotification(ui = "Please select only numeric inputs", type = "error", duration = NULL, closeButton = TRUE)
             nonnum_var <- names(which(FALSE == var_types))
             validate(
-              need(!(FALSE %in% var_types), paste0("non-numeric feature selected: ", nonnum_var, sep=""))
+              need(!(FALSE %in% var_types), paste0("non-numeric feature selected: ", nonnum_var, sep = ""))
             )
           }
           rvals$data_warn <- FALSE
@@ -137,7 +137,8 @@ calc_c_fi <- eventReactive(input$compute_c_FiBtn, {
           incProgress(2 / 5)
           df_rf <- df_rf[complete.cases(df_rf), ]
           obs_groups <- df_rf %>%
-            group_by_at(input$dependentVar_c_fi) %>% count()
+            group_by_at(input$dependentVar_c_fi) %>%
+            count()
           if (any(obs_groups$n == 1)) {
             showNotification(ui = "Warning: only one observation in group", type = "warning", duration = 3, closeButton = TRUE)
           }
@@ -145,7 +146,7 @@ calc_c_fi <- eventReactive(input$compute_c_FiBtn, {
           incProgress(3 / 5)
           df_rf <- df_rf %>% mutate(dependentVar_c_fiRF = factor(df_rf[[input$dependentVar_c_fi]]))
           incProgress(4 / 5)
-          df_rf <- df_rf[,-1]
+          df_rf <- df_rf[, -1]
           fi <- randomForest(dependentVar_c_fiRF ~ ., data = df_rf, importance = TRUE, na.action = na.exclude)
         }
       )
@@ -163,7 +164,8 @@ calc_c_fi <- eventReactive(input$compute_c_FiBtn, {
         {
           incProgress(1 / 3)
           fi <- caret::rfe(x = x_train_c_rfe(), y = y_train_c_rfe(), size = n_c_fi, rfeControl = rfe_c_cont)
-        })
+        }
+      )
     }
     fi
   }
@@ -236,7 +238,7 @@ output_c_fi_plot <- eventReactive(input$compute_c_FiBtn, {
             theme(plot.title = element_text(size = 12, family = "sans")) +
             theme(panel.border = element_blank(), axis.line = element_line(color = "black", size = 0.5), axis.ticks = element_line(color = "black", size = 0.5), panel.grid.minor = element_blank(), panel.grid.major = element_blank()) +
             theme(plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), "mm"))
-          rf_plot_GINI <- rf_plot_GINI+ geom_vline(aes(xintercept = 0), linetype = "dashed", colour = "grey")
+          rf_plot_GINI <- rf_plot_GINI + geom_vline(aes(xintercept = 0), linetype = "dashed", colour = "grey")
           rf_plots <- (rf_plot_accuracy + rf_plot_GINI)
           name <- paste("RandomForest_Classification_FeatureImportancePlot", ".png", sep = "")
           ggsave(name, rf_plots, path = tempdir())
@@ -250,7 +252,8 @@ output_c_fi_plot <- eventReactive(input$compute_c_FiBtn, {
           incProgress(1 / 2)
           varimp_data <- data.frame(
             feature = row.names(varImp(obj_fi))[1:length(predictors(obj_fi))],
-            obj_fi[["fit"]][["importance"]])
+            obj_fi[["fit"]][["importance"]]
+          )
           rf_plot_accuracy <- ggplot(data = varimp_data, aes(y = reorder(rownames(varimp_data), MeanDecreaseAccuracy), x = MeanDecreaseAccuracy)) +
             geom_point(color = "black", size = 4, alpha = 1) +
             geom_segment(aes(y = feature, yend = feature, x = 0, xend = MeanDecreaseAccuracy), color = "black") +
@@ -343,7 +346,7 @@ output_c_fi <- eventReactive(input$compute_c_FiBtn, {
     if (input$select_c_fimethod == "random forest") {
       a <- df_c_fi()
       b <- importance(a)
-      out_fi <- list(a , b)
+      out_fi <- list(a, b)
     } else if (input$select_c_fimethod == "recursive feature elimination") {
       a <- df_c_fi()
       b <- a[["fit"]][["importance"]]
@@ -377,7 +380,7 @@ rfe_c_data <- reactive({
     showNotification(ui = "Please select only numeric inputs", type = "error", duration = NULL, closeButton = TRUE)
     nonnum_var <- names(which(FALSE == var_types))
     validate(
-      need(!(FALSE %in% var_types), paste0("non-numeric feature selected: ", nonnum_var, sep=""))
+      need(!(FALSE %in% var_types), paste0("non-numeric feature selected: ", nonnum_var, sep = ""))
     )
   }
   rvals$data_warn <- FALSE
@@ -390,7 +393,8 @@ rfe_c_data <- reactive({
     rvals$data_warn_n <- sum(!complete.cases(df_check))
   }
   obs_groups <- df_rfe %>%
-    group_by_at(input$dependentVar_c_fi) %>% count()
+    group_by_at(input$dependentVar_c_fi) %>%
+    count()
   if (any(obs_groups$n == 1)) {
     showNotification(ui = "Too few observations per group", type = "error", duration = NULL, closeButton = TRUE)
     validate(
@@ -458,7 +462,7 @@ output$download_c_fiplot <- downloadHandler(
       {
         shiny::incProgress(1 / 10)
         Sys.sleep(1)
-        workingdir = getwd()
+        workingdir <- getwd()
         setwd(tempdir())
         if (input$select_c_fimethod == "random forest") {
           name <- paste("RandomForest_Classification_FeatureImportancePlot", ".png", sep = "")
@@ -488,24 +492,28 @@ output$report_c_fi <- downloadHandler(
         file.copy("report_fi.Rmd", tempReport, overwrite = FALSE)
         shiny::incProgress(2 / 5)
         # Set up parameters to pass to Rmd document
-        params <- list(session_info = sessioninfo::session_info()$platform,
-                       feature_vars = input$feature_c_fi_variableSelect,
-                       dependent_var = input$dependentVar_c_fi,
-                       groups = rvals$groups_lvl,
-                       warning_data = rvals$data_warn,
-                       warning_data_n = rvals$data_warn_n,
-                       fi_method = input$fi_input,
-                       fi_model = input$select_c_fimethod,
-                       folds_n = input$c_n_folds,
-                       repeats_n = input$c_n_repeats,
-                       fi_output = rvals$rval_fi_output,
-                       fi_plot = rvals$rval_fi_plot,
-                       na_omit = rvals$na_omit,
-                       na_n = rvals$n_na)
+        params <- list(
+          session_info = sessioninfo::session_info()$platform,
+          feature_vars = input$feature_c_fi_variableSelect,
+          dependent_var = input$dependentVar_c_fi,
+          groups = rvals$groups_lvl,
+          warning_data = rvals$data_warn,
+          warning_data_n = rvals$data_warn_n,
+          fi_method = input$fi_input,
+          fi_model = input$select_c_fimethod,
+          folds_n = input$c_n_folds,
+          repeats_n = input$c_n_repeats,
+          fi_output = rvals$rval_fi_output,
+          fi_plot = rvals$rval_fi_plot,
+          na_omit = rvals$na_omit,
+          na_n = rvals$n_na
+        )
         shiny::incProgress(3 / 5)
-        rmarkdown::render(tempReport, output_file = file,
-                          params = params,
-                          envir = new.env(parent = globalenv()))
+        rmarkdown::render(tempReport,
+          output_file = file,
+          params = params,
+          envir = new.env(parent = globalenv())
+        )
         shiny::incProgress(4 / 5)
       }
     )
@@ -605,7 +613,7 @@ calc_r_fi <- eventReactive(input$compute_r_FiBtn, {
       df_na <- as.data.frame(subset(df_na, select = c(features)))
       rvals$n_na <- count(df_na[complete.cases(df_na), ])
       g <- na.omit(g)
-      df_var <- df_var[!is.na(df_var[[group_col]]),]
+      df_var <- df_var[!is.na(df_var[[group_col]]), ]
     } else {
       rvals$na_omit <- FALSE
       rvals$n_na <- 0
@@ -631,7 +639,7 @@ calc_r_fi <- eventReactive(input$compute_r_FiBtn, {
             showNotification(ui = "Please select only numeric inputs", type = "error", duration = NULL, closeButton = TRUE)
             nonnum_var <- names(which(FALSE == var_types))
             validate(
-              need(!(FALSE %in% var_types), paste0("non-numeric feature selected: ", nonnum_var, sep=""))
+              need(!(FALSE %in% var_types), paste0("non-numeric feature selected: ", nonnum_var, sep = ""))
             )
           }
           rvals$data_warn <- FALSE
@@ -670,7 +678,8 @@ calc_r_fi <- eventReactive(input$compute_r_FiBtn, {
         {
           incProgress(1 / 3)
           fi <- caret::rfe(x = x_train_r_rfe(), y = y_train_r_rfe(), size = n_r_fi, rfeControl = rfe_r_cont)
-        })
+        }
+      )
     }
     fi
   }
@@ -758,7 +767,8 @@ output_r_fi_plot <- eventReactive(input$compute_r_FiBtn, {
           incProgress(1 / 2)
           varimp_data <- data.frame(
             feature = row.names(varImp(obj_fi))[1:length(predictors(obj_fi))],
-            obj_fi[["fit"]][["importance"]])
+            obj_fi[["fit"]][["importance"]]
+          )
           varimp_data <- varimp_data %>% rename(IncMSE = "X.IncMSE")
           rf_plot_MSE <- ggplot(data = varimp_data, aes(y = reorder(rownames(varimp_data), IncMSE), x = IncMSE)) +
             geom_point(color = "black", size = 4, alpha = 1) +
@@ -834,7 +844,7 @@ output_r_fi <- eventReactive(input$compute_r_FiBtn, {
     if (input$select_r_fimethod == "random forest") {
       a <- df_r_fi()
       b <- importance(a)
-      out_fi <- list(a , b)
+      out_fi <- list(a, b)
     } else if (input$select_r_fimethod == "recursive feature elimination") {
       a <- df_r_fi()
       b <- a[["fit"]][["importance"]]
@@ -868,7 +878,7 @@ rfe_r_data <- reactive({
     showNotification(ui = "Please select only numeric inputs", type = "error", duration = NULL, closeButton = TRUE)
     nonnum_var <- names(which(FALSE == var_types))
     validate(
-      need(!(FALSE %in% var_types), paste0("non-numeric feature selected: ", nonnum_var, sep=""))
+      need(!(FALSE %in% var_types), paste0("non-numeric feature selected: ", nonnum_var, sep = ""))
     )
   }
   rvals$data_warn <- FALSE
@@ -940,7 +950,7 @@ output$download_r_fiplot <- downloadHandler(
       {
         shiny::incProgress(1 / 10)
         Sys.sleep(1)
-        workingdir = getwd()
+        workingdir <- getwd()
         setwd(tempdir())
         if (input$select_r_fimethod == "random forest") {
           name <- paste("RandomForest_Regression_FeatureImportancePlot", ".png", sep = "")
@@ -970,24 +980,28 @@ output$report_r_fi <- downloadHandler(
         file.copy("report_fi.Rmd", tempReport, overwrite = FALSE)
         shiny::incProgress(2 / 5)
         # Set up parameters to pass to Rmd document
-        params <- list(session_info = sessioninfo::session_info()$platform,
-                       feature_vars = input$feature_c_fi_variableSelect,
-                       dependent_var = input$dependentVar_c_fi,
-                       groups = rvals$groups_lvl,
-                       warning_data = rvals$data_warn,
-                       warning_data_n = rvals$data_warn_n,
-                       fi_method = input$fi_input,
-                       fi_model = input$select_c_fimethod,
-                       folds_n = input$c_n_folds,
-                       repeats_n = input$c_n_repeats,
-                       fi_output = rvals$rval_fi_output,
-                       fi_plot = rvals$rval_fi_plot,
-                       na_omit = rvals$na_omit,
-                       na_n = rvals$n_na)
+        params <- list(
+          session_info = sessioninfo::session_info()$platform,
+          feature_vars = input$feature_c_fi_variableSelect,
+          dependent_var = input$dependentVar_c_fi,
+          groups = rvals$groups_lvl,
+          warning_data = rvals$data_warn,
+          warning_data_n = rvals$data_warn_n,
+          fi_method = input$fi_input,
+          fi_model = input$select_c_fimethod,
+          folds_n = input$c_n_folds,
+          repeats_n = input$c_n_repeats,
+          fi_output = rvals$rval_fi_output,
+          fi_plot = rvals$rval_fi_plot,
+          na_omit = rvals$na_omit,
+          na_n = rvals$n_na
+        )
         shiny::incProgress(3 / 5)
-        rmarkdown::render(tempReport, output_file = file,
-                          params = params,
-                          envir = new.env(parent = globalenv()))
+        rmarkdown::render(tempReport,
+          output_file = file,
+          params = params,
+          envir = new.env(parent = globalenv())
+        )
         shiny::incProgress(4 / 5)
       }
     )

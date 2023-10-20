@@ -1,6 +1,8 @@
 testingStats <- fluidRow(
-  column(width = 4,
-    shinydashboard::box(title= "Statistical Tests", width = NULL,
+  column(
+    width = 4,
+    shinydashboard::box(
+      title = "Statistical Tests", width = NULL,
       div(style = "margin-top: -10px;"),
       # Input for selecting which variable to test for
       pickerInput(
@@ -8,7 +10,8 @@ testingStats <- fluidRow(
         label = "Select features",
         choices = "... no features found",
         options = list(
-          'live-search'=TRUE), 
+          "live-search" = TRUE
+        ),
         multiple = FALSE
       ),
       # Grouping variable input
@@ -22,16 +25,18 @@ testingStats <- fluidRow(
       downloadButton("report_stats", "Save Report")
     )
   ),
-  column(width = 8,
-    shinydashboard::tabBox(width = NULL,
+  column(
+    width = 8,
+    shinydashboard::tabBox(
+      width = NULL,
       # Output for displaying data and/or metadata summary
       tabPanel("Output",
-       fluid = TRUE,
-       verbatimTextOutput("stats_output")
-     ),
-     tabPanel("Data",
-       fluid = TRUE,
-      DT::dataTableOutput("stats_table"), style = "height:500px; overflow-y: scroll;overflow-x: scroll;"
+        fluid = TRUE,
+        verbatimTextOutput("stats_output")
+      ),
+      tabPanel("Data",
+        fluid = TRUE,
+        DT::dataTableOutput("stats_table"), style = "height:500px; overflow-y: scroll;overflow-x: scroll;"
       ),
     )
   )

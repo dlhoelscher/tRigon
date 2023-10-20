@@ -14,9 +14,11 @@ params:
   warning_data_n: NA
 ---
 ```{r, echo=FALSE}
-htmltools::img(src = "tRigon_logo.png",
-               alt = 'logo', 
-               style = 'position:absolute; top:0px; right:135px; height: 80px')
+htmltools::img(
+  src = "tRigon_logo.png",
+  alt = "logo",
+  style = "position:absolute; top:0px; right:135px; height: 80px"
+)
 ```
 ---
 
@@ -28,7 +30,10 @@ params$session_info
 if (params$corr_method == "Simple") {
   print("Simple correlation between two variables.")
 } else if (params$corr_method == "Multiple") {
-  print(paste0("Multiple correlation with ", length(params$feature_vars), " features."))
+  print(paste0(
+    "Multiple correlation with ", length(params$feature_vars),
+    " features."
+  ))
 }
 ```
 
@@ -58,9 +63,9 @@ if (params$warning_data) {
 correlation data:
 ```{r, echo = FALSE}
 if (params$corr_method == "Multiple") {
-  knitr::kable(params$corr_df, format="markdown")
+  knitr::kable(params$corr_df, format = "markdown")
 } else if (params$corr_method == "Simple") {
-  print(paste0("simple correlation Pearson's R: ", params$corr_df[1,3], " p-value: ", params$corr_df[1,4]))
+  print(paste0("simple correlation Pearson's R: ", params$corr_df[1, 3], " p-value: ", params$corr_df[1, 4]))
 }
 ```
 

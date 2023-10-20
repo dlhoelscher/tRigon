@@ -1,6 +1,6 @@
 # correlation
 
-#perform simple correlation and create result df
+# perform simple correlation and create result df
 scorr_data <- reactive({
   withProgress(
     message = paste0("Rendering Plot"),
@@ -30,7 +30,7 @@ scorr_data <- reactive({
           showNotification(ui = "Please select only numeric inputs", type = "error", duration = NULL, closeButton = TRUE)
           nonnum_var <- names(which(FALSE == var_types))
           validate(
-            need(!(FALSE %in% var_types), paste0("non-numeric feature selected: ", nonnum_var, sep=""))
+            need(!(FALSE %in% var_types), paste0("non-numeric feature selected: ", nonnum_var, sep = ""))
           )
         }
         rvals$data_warn <- FALSE
@@ -50,7 +50,7 @@ scorr_data <- reactive({
             need((any(obs_groups$n > 1)), "Too few observations in subgroups to perform correlation analysis.")
           )
         }
-        cor_obj <- cor.test(df_corr[[input$feature_scorr_variableSelect[1]]], df_corr[[input$feature_scorr_variableSelect[2]]], na.rm=TRUE)
+        cor_obj <- cor.test(df_corr[[input$feature_scorr_variableSelect[1]]], df_corr[[input$feature_scorr_variableSelect[2]]], na.rm = TRUE)
         df_corr$R <- cor_obj[["estimate"]][["cor"]]
         df_corr$R[duplicated(df_corr$R)] <- NA
         df_corr$p_value <- cor_obj[["p.value"]]
@@ -62,7 +62,7 @@ scorr_data <- reactive({
           showNotification(ui = "Please select only numeric inputs", type = "error", duration = NULL, closeButton = TRUE)
           nonnum_var <- names(which(FALSE == var_types))
           validate(
-            need(!(FALSE %in% var_types), paste0("non-numeric feature selected: ", nonnum_var, sep=""))
+            need(!(FALSE %in% var_types), paste0("non-numeric feature selected: ", nonnum_var, sep = ""))
           )
         }
         rvals$data_warn <- FALSE
@@ -82,7 +82,7 @@ scorr_data <- reactive({
             need((any(obs_groups$n > 1)), "Too few observations in subgroups to perform correlation analysis.")
           )
         }
-        cor_obj <- cor.test(df_corr[[input$feature_scorr_variableSelect[1]]], df_corr[[input$feature_scorr_variableSelect[2]]], na.rm=TRUE)
+        cor_obj <- cor.test(df_corr[[input$feature_scorr_variableSelect[1]]], df_corr[[input$feature_scorr_variableSelect[2]]], na.rm = TRUE)
         df_corr$R <- cor_obj[["estimate"]][["cor"]]
         df_corr$R[duplicated(df_corr$R)] <- NA
         df_corr$p_value <- cor_obj[["p.value"]]
@@ -188,18 +188,19 @@ scorr_plot <- eventReactive(input$s_correlationBtn, {
     feature_x <- colnames(df_corrplot)[1]
     feature_y <- colnames(df_corrplot)[2]
     if (df_corrplot[1, 3] > 0) {
-      label_y <- (min(df_corrplot[, 2]) - (max(df_corrplot[, 2]) - min(df_corrplot[, 2]))*0.1)
+      label_y <- (min(df_corrplot[, 2]) - (max(df_corrplot[, 2]) - min(df_corrplot[, 2])) * 0.1)
     } else {
-      label_y <- (max(df_corrplot[, 2]) + (max(df_corrplot[, 2]) - min(df_corrplot[, 2]))*0.1)
+      label_y <- (max(df_corrplot[, 2]) + (max(df_corrplot[, 2]) - min(df_corrplot[, 2])) * 0.1)
     }
     s_corrp <- ggplot(df_corrplot, aes_string(x = feature_x, y = feature_y)) +
       geom_point(color = "black") +
       geom_smooth(method = lm, se = TRUE) +
       theme_bw() +
-      xlab(feature_x) + ylab (feature_y) +
+      xlab(feature_x) +
+      ylab(feature_y) +
       theme(legend.position = "none") +
       ggtitle("") +
-      stat_cor(label.x.npc = "left", label.y = label_y, size= 5) +
+      stat_cor(label.x.npc = "left", label.y = label_y, size = 5) +
       theme(axis.text = element_text(size = 9, family = "sans")) +
       theme(axis.title = element_text(size = 11, family = "sans")) +
       theme(plot.title = element_text(size = 12, family = "sans")) +
@@ -262,7 +263,7 @@ output$download_s_corrplot <- downloadHandler(
       {
         shiny::incProgress(1 / 10)
         Sys.sleep(1)
-        workingdir = getwd()
+        workingdir <- getwd()
         setwd(tempdir())
         name <- paste("simplecorrelation_plot.png", sep = "")
         shiny::incProgress(5 / 10)
@@ -288,20 +289,24 @@ output$report_s_corr <- downloadHandler(
         file.copy("report_corr.Rmd", tempReport, overwrite = FALSE)
         shiny::incProgress(2 / 5)
         # Set up parameters to pass to Rmd document
-        params <- list(session_info = sessioninfo::session_info()$platform,
-                       feature_vars = input$feature_scorr_variableSelect,
-                       subgroups_en = input$input_scorr_subgroups,
-                       corr_method = input$corr_input,
-                       warning_data = rvals$data_warn,
-                       warning_data_n = rvals$data_warn_n,
-                       group_corr = input$groupVar_scorr,
-                       subgroup_corr = input$groupVar_scorr_name,
-                       corr_df = rvals$rval_corrdf,
-                       corr_plot = rvals$rval_corrplot)
+        params <- list(
+          session_info = sessioninfo::session_info()$platform,
+          feature_vars = input$feature_scorr_variableSelect,
+          subgroups_en = input$input_scorr_subgroups,
+          corr_method = input$corr_input,
+          warning_data = rvals$data_warn,
+          warning_data_n = rvals$data_warn_n,
+          group_corr = input$groupVar_scorr,
+          subgroup_corr = input$groupVar_scorr_name,
+          corr_df = rvals$rval_corrdf,
+          corr_plot = rvals$rval_corrplot
+        )
         shiny::incProgress(3 / 5)
-        rmarkdown::render(tempReport, output_file = file,
-                          params = params,
-                          envir = new.env(parent = globalenv()))
+        rmarkdown::render(tempReport,
+          output_file = file,
+          params = params,
+          envir = new.env(parent = globalenv())
+        )
         shiny::incProgress(4 / 5)
       }
     )
@@ -310,7 +315,7 @@ output$report_s_corr <- downloadHandler(
 
 # multiple correlation
 
-#perform simple correlation and create result df
+# perform simple correlation and create result df
 mcorr_data <- reactive({
   withProgress(
     message = paste0("Rendering Plot"),
@@ -334,7 +339,7 @@ mcorr_data <- reactive({
           showNotification(ui = "Please select only numeric inputs", type = "error", duration = NULL, closeButton = TRUE)
           nonnum_var <- names(which(FALSE == var_types))
           validate(
-            need(!(FALSE %in% var_types), paste0("non-numeric feature selected: ", nonnum_var, sep=""))
+            need(!(FALSE %in% var_types), paste0("non-numeric feature selected: ", nonnum_var, sep = ""))
           )
         }
         df_corr <- filter(df_var, df_var[, 1] == group_name)
@@ -364,7 +369,7 @@ mcorr_data <- reactive({
           showNotification(ui = "Please select only numeric inputs", type = "error", duration = NULL, closeButton = TRUE)
           nonnum_var <- names(which(FALSE == var_types))
           validate(
-            need(!(FALSE %in% var_types), paste0("non-numeric feature selected: ", nonnum_var, sep=""))
+            need(!(FALSE %in% var_types), paste0("non-numeric feature selected: ", nonnum_var, sep = ""))
           )
         }
         df_check <- colSums(!is.na(df_corr))
@@ -492,8 +497,9 @@ mcorr_plot <- eventReactive(input$m_correlationBtn, {
         panel.border = element_blank(),
         panel.background = element_blank(),
         axis.ticks = element_blank(),
-        axis.text.x=element_text(angle = 45, hjust = 1),
-        legend.position = "none")
+        axis.text.x = element_text(angle = 45, hjust = 1),
+        legend.position = "none"
+      )
     name <- paste("correlation_matrix", "_", length(input$feature_mcorr_variableSelect), "features", ".png", sep = "")
     ggsave(name, m_corrp, path = tempdir())
     rvals$rval_corrplot <- m_corrp
@@ -533,7 +539,7 @@ output$download_m_corrplot <- downloadHandler(
       {
         shiny::incProgress(1 / 10)
         Sys.sleep(1)
-        workingdir = getwd()
+        workingdir <- getwd()
         setwd(tempdir())
         name <- paste("correlation_matrix", "_", length(input$feature_mcorr_variableSelect), "features", ".png", sep = "")
         shiny::incProgress(5 / 10)
@@ -559,20 +565,24 @@ output$report_m_corr <- downloadHandler(
         file.copy("report_corr.Rmd", tempReport, overwrite = FALSE)
         shiny::incProgress(2 / 5)
         # Set up parameters to pass to Rmd document
-        params <- list(session_info = sessioninfo::session_info()$platform,
-                       feature_vars = input$feature_mcorr_variableSelect,
-                       subgroups_en = input$input_mcorr_subgroups,
-                       corr_method = input$corr_input,
-                       warning_data = rvals$data_warn,
-                       warning_data_n = rvals$data_warn_n,
-                       group_corr = input$groupVar_mcorr,
-                       subgroup_corr = input$groupVar_mcorr_name,
-                       corr_df = rvals$rval_corrdf,
-                       corr_plot = rvals$rval_corrplot)
+        params <- list(
+          session_info = sessioninfo::session_info()$platform,
+          feature_vars = input$feature_mcorr_variableSelect,
+          subgroups_en = input$input_mcorr_subgroups,
+          corr_method = input$corr_input,
+          warning_data = rvals$data_warn,
+          warning_data_n = rvals$data_warn_n,
+          group_corr = input$groupVar_mcorr,
+          subgroup_corr = input$groupVar_mcorr_name,
+          corr_df = rvals$rval_corrdf,
+          corr_plot = rvals$rval_corrplot
+        )
         shiny::incProgress(3 / 5)
-        rmarkdown::render(tempReport, output_file = file,
-                          params = params,
-                          envir = new.env(parent = globalenv()))
+        rmarkdown::render(tempReport,
+          output_file = file,
+          params = params,
+          envir = new.env(parent = globalenv())
+        )
         shiny::incProgress(4 / 5)
       }
     )

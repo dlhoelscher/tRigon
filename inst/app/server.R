@@ -48,11 +48,11 @@ server <- function(input, output, session) {
   )
 
   # define color palette
-  qual_col_pals = brewer.pal.info[brewer.pal.info$category == 'qual',]
-  col_vector = unlist(mapply(brewer.pal, qual_col_pals$maxcolors, rownames(qual_col_pals)))
+  qual_col_pals <- brewer.pal.info[brewer.pal.info$category == "qual", ]
+  col_vector <- unlist(mapply(brewer.pal, qual_col_pals$maxcolors, rownames(qual_col_pals)))
   my_palette <- c("#a82203", "#208cc0", "#f1af3a", "#cf5e4e", "#637b31", "#003967", "#60D394", "#37123C", "#172A3A", "#8D5A97", "#01FDF6", "grey")
 
-  #load dependencies
+  # load dependencies
   source("server-analysis-processData.R", local = TRUE)
   source("server-analysis-loadData.R", local = TRUE)
   source("server-analysis-descriptiveStats.R", local = TRUE)

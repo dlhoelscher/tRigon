@@ -18,13 +18,15 @@ params:
   na_n: NA
 ---
 ```{r setup, include=FALSE} 
-knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 ```
 
 ```{r, echo=FALSE}
-htmltools::img(src = "tRigon_logo.png",
-               alt = 'logo', 
-               style = 'position:absolute; top:0px; right:135px; height: 80px')
+htmltools::img(
+  src = "tRigon_logo.png",
+  alt = "logo",
+  style = "position:absolute; top:0px; right:135px; height: 80px"
+)
 ```
 ---
 
@@ -44,7 +46,7 @@ params$dependent_var
 
 groups / levels of dependent variable:
 ```{r, echo = FALSE}
-if(params$fi_method == "Classification") {
+if (params$fi_method == "Classification") {
   params$groups
   if (params$na_omit == TRUE) {
     print(paste0("Warning: dependent variable contains NAs. ", params$na_n, " values excluded."))
@@ -59,18 +61,18 @@ if(params$fi_method == "Classification") {
 
 feature importance method:
 ```{r, echo = FALSE}
-if (params$fi_method == "Classification") { #classification
+if (params$fi_method == "Classification") { # classification
   if (params$fi_model == "recursive feature elimination") {
-    print(paste0("recursive feature elimination (RFE) with ", params$folds_n,"-fold cross-validation and ", params$repeats_n," repeats for classification of groups of the dependent variable. Data is distributed in a random 80/20 split for training and testing."))
+    print(paste0("recursive feature elimination (RFE) with ", params$folds_n, "-fold cross-validation and ", params$repeats_n, " repeats for classification of groups of the dependent variable. Data is distributed in a random 80/20 split for training and testing."))
   } else if (params$fi_model == "random forest") {
     print("random forest model for classification of the dependent variable.")
   }
-} else if (params$fi_method == "Regression") { #Regression
- if (params$fi_model == "recursive feature elimination") {
-    print(paste0("recursive feature elimination (RFE) with ", params$folds_n,"-fold cross-validation and ", params$repeats_n," repeats for regression of the dependent variable. Data is distributed in a random 80/20 split for training and testing."))
+} else if (params$fi_method == "Regression") { # Regression
+  if (params$fi_model == "recursive feature elimination") {
+    print(paste0("recursive feature elimination (RFE) with ", params$folds_n, "-fold cross-validation and ", params$repeats_n, " repeats for regression of the dependent variable. Data is distributed in a random 80/20 split for training and testing."))
   } else if (params$fi_model == "random forest") {
     print("random forest model for regression of the dependent variable.")
-  } 
+  }
 }
 ```      
 

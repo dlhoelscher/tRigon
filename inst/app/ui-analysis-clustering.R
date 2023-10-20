@@ -1,6 +1,8 @@
 clustering <- fluidRow(
-  column(width = 4,
-    shinydashboard::box(title= "k-means Clustering", width = NULL,
+  column(
+    width = 4,
+    shinydashboard::box(
+      title = "k-means Clustering", width = NULL,
       div(style = "margin-top: -10px;"),
       # Input for selecting which variables to analyze
       pickerInput(
@@ -8,9 +10,9 @@ clustering <- fluidRow(
         label = "Select features", selected = "",
         choices = "...no features found",
         options = list(
-          `actions-box` = TRUE, 
-          size = 12, 'live-search'=TRUE
-        ), 
+          `actions-box` = TRUE,
+          size = 12, "live-search" = TRUE
+        ),
         multiple = TRUE
       ),
       sliderInput("cluster_n", "Number of clusters",
@@ -29,8 +31,10 @@ clustering <- fluidRow(
       downloadButton("report_clustering", "Save Report")
     )
   ),
-  column(width = 8,
-    shinydashboard::tabBox(width = NULL,
+  column(
+    width = 8,
+    shinydashboard::tabBox(
+      width = NULL,
       tabPanel("Summary",
         fluid = TRUE,
         verbatimTextOutput("cluster_output")

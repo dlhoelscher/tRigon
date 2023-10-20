@@ -35,7 +35,7 @@ clustering <- shiny::reactive({
         showNotification(ui = "Please select only numeric inputs", type = "error", duration = NULL, closeButton = TRUE)
         nonnum_var <- names(which(FALSE == var_types))
         validate(
-          need(!(FALSE %in% var_types), paste0("non-numeric feature selected: ", nonnum_var, sep=""))
+          need(!(FALSE %in% var_types), paste0("non-numeric feature selected: ", nonnum_var, sep = ""))
         )
       }
       rvals$data_warn <- FALSE
@@ -61,10 +61,10 @@ clustering <- shiny::reactive({
       }
       if (input$cluster_groups_en) {
         df_cluster[[group_col]] <- as.character(df_cluster[[group_col]])
-        data_cluster  <- scale(df_cluster %>% select(input$feature_cluster_variableSelect))
+        data_cluster <- scale(df_cluster %>% select(input$feature_cluster_variableSelect))
         data_cluster <- cbind(df_cluster[[group_col]], data_cluster)
       } else {
-        data_cluster  <- scale(df_cluster)
+        data_cluster <- scale(df_cluster)
       }
       rvals$rval_data_cluster <- data_cluster
       c <- kmeans(subset(data_cluster, select = input$feature_cluster_variableSelect), centers = input$cluster_n)
@@ -138,7 +138,7 @@ output_cluster_p <- shiny::eventReactive(input$clusterBtn, {
         cluster_viz <- cbind(rvals$rval_data_cluster[, c(1)], cluster_viz)
         cluster_viz <- cluster_viz %>% rename_at(1, ~ input$groupVar_cluster)
         cluster_viz[[input$groupVar_cluster]] <- as.character(cluster_viz[[input$groupVar_cluster]])
-        cp <- fviz_cluster(clustering_alg(), data = cluster_viz[, -c(1)], geom = "point", palette = my_palette, ggtheme = theme_bw(), shape = 16) + geom_point(aes(shape = cluster_viz[, c(1)])) + scale_shape_manual(values=seq(0,15), name = input$groupVar_cluster)
+        cp <- fviz_cluster(clustering_alg(), data = cluster_viz[, -c(1)], geom = "point", palette = my_palette, ggtheme = theme_bw(), shape = 16) + geom_point(aes(shape = cluster_viz[, c(1)])) + scale_shape_manual(values = seq(0, 15), name = input$groupVar_cluster)
         name <- paste("k-means_", input$cluster_n, "_clusters.png", sep = "")
         ggsave(name, cp, path = tempdir())
       } else {
@@ -171,7 +171,7 @@ output$download_clusterplot <- downloadHandler(
       {
         shiny::incProgress(1 / 10)
         Sys.sleep(1)
-        workingdir = getwd()
+        workingdir <- getwd()
         setwd(tempdir())
         name <- paste("k-means_", input$cluster_n, "_clusters.png", sep = "")
         shiny::incProgress(5 / 10)
@@ -197,20 +197,24 @@ output$report_clustering <- downloadHandler(
         file.copy("report_cluster.Rmd", tempReport, overwrite = FALSE)
         shiny::incProgress(2 / 5)
         # Set up parameters to pass to Rmd document
-        params <- list(session_info = sessioninfo::session_info()$platform,
-                       feature_vars = input$feature_cluster_variableSelect,
-                       clusters_n = input$cluster_n,
-                       groups_en = input$cluster_groups_en,
-                       group_var = input$groupVar_cluster,
-                       groups = rvals$groups_lvl,
-                       warning_data = rvals$data_warn,
-                       warning_data_n = rvals$data_warn_n,
-                       cluster_output = rvals$rval_output_cluster,
-                       cluster_plot = rvals$rval_plot_cluster)
+        params <- list(
+          session_info = sessioninfo::session_info()$platform,
+          feature_vars = input$feature_cluster_variableSelect,
+          clusters_n = input$cluster_n,
+          groups_en = input$cluster_groups_en,
+          group_var = input$groupVar_cluster,
+          groups = rvals$groups_lvl,
+          warning_data = rvals$data_warn,
+          warning_data_n = rvals$data_warn_n,
+          cluster_output = rvals$rval_output_cluster,
+          cluster_plot = rvals$rval_plot_cluster
+        )
         shiny::incProgress(3 / 5)
-        rmarkdown::render(tempReport, output_file = file,
-                          params = params,
-                          envir = new.env(parent = globalenv()))
+        rmarkdown::render(tempReport,
+          output_file = file,
+          params = params,
+          envir = new.env(parent = globalenv())
+        )
         shiny::incProgress(4 / 5)
       }
     )

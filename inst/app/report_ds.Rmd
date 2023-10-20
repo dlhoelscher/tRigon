@@ -11,13 +11,15 @@ params:
   na_n: NA
 ---
 ```{r setup, include=FALSE} 
-knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 ```
 
 ```{r, echo=FALSE}
-htmltools::img(src = "tRigon_logo.png",
-               alt = 'logo', 
-               style = 'position:absolute; top:0px; right:135px; height: 80px')
+htmltools::img(
+  src = "tRigon_logo.png",
+  alt = "logo",
+  style = "position:absolute; top:0px; right:135px; height: 80px"
+)
 ```
 ---
 
@@ -45,5 +47,5 @@ if (params$na_omit == TRUE) {
 
 descriptive statistics:
 ```{r, echo = FALSE}
-knitr::kable(params$ds_df, format="markdown")
+knitr::kable(params$ds_df, format = "markdown")
 ```

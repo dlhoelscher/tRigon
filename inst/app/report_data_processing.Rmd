@@ -13,9 +13,11 @@ params:
   n_files: NA
 ---
 ```{r, echo=FALSE}
-htmltools::img(src = "tRigon_logo.png",
-               alt = 'logo', 
-               style = 'position:absolute; top:0px; right:135px; height: 80px')
+htmltools::img(
+  src = "tRigon_logo.png",
+  alt = "logo",
+  style = "position:absolute; top:0px; right:135px; height: 80px"
+)
 ```
 ---
 
