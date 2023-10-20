@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 ```
 Pathomics enables automated, reproducible and precise histopathology analysis and morphological phenotyping. Similar to other molecular omics, pathomics datasets are highly-dimensional and large in size, but also face increased outlier variability and inherent data missingness, making a quick and comprehensible data analysis challenging. 
 
-To facilitate pathomics data analysis and interpretation as well as support a broad implementation for all researchers we developed tRigon (Toolbox foR InteGrative pathOmics aNalysis), a Shiny application built in the R enviroment for fast, comprehensive and reproducible pathomics analysis. tRigon allows researchers without coding abilities to perform their own exploratory feature analyses.
+To facilitate pathomics data analysis and interpretation as well as support a broad implementation for all researchers we developed tRigon (Toolbox foR InteGrative pathOmics aNalysis), a Shiny application built in the R environment for fast, comprehensive and reproducible pathomics analysis. tRigon allows researchers without coding abilities to perform their own exploratory feature analyses.
 
 ## Installation
 
