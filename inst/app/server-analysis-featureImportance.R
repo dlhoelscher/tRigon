@@ -98,7 +98,7 @@ calc_c_fi <- eventReactive(input$compute_c_FiBtn, {
       rvals$na_omit <- FALSE
       rvals$n_na <- 0
     }
-    rvals$groups_lvl <- unique(df_var[[group_col]])
+    rvals$groups_lvl <- as.character(unique(df_var[[group_col]]))
     if (is.numeric(df_var[[input$dependentVar_c_fi]])) {
       showNotification(ui = "Numeric dependent var - consider regression", type = "warning", duration = 5, closeButton = TRUE)
     }

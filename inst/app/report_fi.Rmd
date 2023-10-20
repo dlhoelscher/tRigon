@@ -47,7 +47,7 @@ params$dependent_var
 groups / levels of dependent variable:
 ```{r, echo = FALSE}
 if (params$fi_method == "Classification") {
-  params$groups
+  print(params$groups)
   if (params$na_omit == TRUE) {
     print(paste0("Warning: dependent variable contains NAs. ", params$na_n, " values excluded."))
   }
