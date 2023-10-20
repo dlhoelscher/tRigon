@@ -32,7 +32,7 @@ server <- function(input, output, session) {
     rval_IDmatches_df = NULL,
     na_omit = NULL,
     n_na = NULL,
-    groups_lvl= NULL,
+    groups_lvl = NULL,
     rval_dsdf = NULL,
     rval_plot = NULL,
     rval_calc = NULL,

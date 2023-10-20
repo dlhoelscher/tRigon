@@ -10,9 +10,9 @@ df_c_fi <- eventReactive(input$compute_c_FiBtn, {
     )
   }
   if (input$dependentVar_c_fi == "") {
-    showNotification(ui = "Please specify a group variable", type = "error", duration = NULL, closeButton = TRUE)
+    showNotification(ui = "Please specify a dependent variable", type = "error", duration = NULL, closeButton = TRUE)
     validate(
-      need(input$dependentVar_c_fi != "", "Please specify a group variable")
+      need(input$dependentVar_c_fi != "", "Please specify a dependent variable")
     )
   }
   if (!(input$dependentVar_c_fi %in% names(rvals$rval_loadeddf) | input$dependentVar_c_fi %in% names(rvals$rval_processeddf))) {
@@ -48,9 +48,9 @@ calc_c_fi <- eventReactive(input$compute_c_FiBtn, {
     )
   }
   if (input$dependentVar_c_fi == "") {
-    showNotification(ui = "Please specify a group variable", type = "error", duration = NULL, closeButton = TRUE)
+    showNotification(ui = "Please specify a dependent variable", type = "error", duration = NULL, closeButton = TRUE)
     validate(
-      need(input$dependentVar_c_fi != "", "Please specify a group variable")
+      need(input$dependentVar_c_fi != "", "Please specify a dependent variable")
     )
   }
   if (!(input$dependentVar_c_fi %in% names(rvals$rval_loadeddf) | input$dependentVar_c_fi %in% names(rvals$rval_processeddf))) {
@@ -181,9 +181,9 @@ output_c_fi_plot <- eventReactive(input$compute_c_FiBtn, {
     )
   }
   if (input$dependentVar_c_fi == "") {
-    showNotification(ui = "Please specify a group variable", type = "error", duration = NULL, closeButton = TRUE)
+    showNotification(ui = "Please specify a dependent variable", type = "error", duration = NULL, closeButton = TRUE)
     validate(
-      need(input$dependentVar_c_fi != "", "Please specify a group variable")
+      need(input$dependentVar_c_fi != "", "Please specify a dependent variable")
     )
   }
   if (!(input$dependentVar_c_fi %in% names(rvals$rval_loadeddf) | input$dependentVar_c_fi %in% names(rvals$rval_processeddf))) {
@@ -319,9 +319,9 @@ output_c_fi <- eventReactive(input$compute_c_FiBtn, {
     )
   }
   if (input$dependentVar_c_fi == "") {
-    showNotification(ui = "Please specify a group variable", type = "error", duration = NULL, closeButton = TRUE)
+    showNotification(ui = "Please specify a dependent variable", type = "error", duration = NULL, closeButton = TRUE)
     validate(
-      need(input$dependentVar_c_fi != "", "Please specify a group variable")
+      need(input$dependentVar_c_fi != "", "Please specify a dependent variable")
     )
   }
   if (!(input$dependentVar_c_fi %in% names(rvals$rval_loadeddf) | input$dependentVar_c_fi %in% names(rvals$rval_processeddf))) {
@@ -530,9 +530,9 @@ df_r_fi <- eventReactive(input$compute_r_FiBtn, {
     )
   }
   if (input$dependentVar_r_fi == "") {
-    showNotification(ui = "Please specify a group variable", type = "error", duration = NULL, closeButton = TRUE)
+    showNotification(ui = "Please specify a dependent variable", type = "error", duration = NULL, closeButton = TRUE)
     validate(
-      need(input$dependentVar_r_fi != "", "Please specify a group variable")
+      need(input$dependentVar_r_fi != "", "Please specify a dependent variable")
     )
   }
   if (!(input$dependentVar_r_fi %in% names(rvals$rval_loadeddf) | input$dependentVar_r_fi %in% names(rvals$rval_processeddf))) {
@@ -568,9 +568,9 @@ calc_r_fi <- eventReactive(input$compute_r_FiBtn, {
     )
   }
   if (input$dependentVar_r_fi == "") {
-    showNotification(ui = "Please specify a group variable", type = "error", duration = NULL, closeButton = TRUE)
+    showNotification(ui = "Please specify a dependent variable", type = "error", duration = NULL, closeButton = TRUE)
     validate(
-      need(input$dependentVar_r_fi != "", "Please specify a group variable")
+      need(input$dependentVar_r_fi != "", "Please specify a dependent variable")
     )
   }
   if (!(input$dependentVar_r_fi %in% names(rvals$rval_loadeddf) | input$dependentVar_r_fi %in% names(rvals$rval_processeddf))) {
@@ -695,9 +695,9 @@ output_r_fi_plot <- eventReactive(input$compute_r_FiBtn, {
     )
   }
   if (input$dependentVar_r_fi == "") {
-    showNotification(ui = "Please specify a group variable", type = "error", duration = NULL, closeButton = TRUE)
+    showNotification(ui = "Please specify a dependent variable", type = "error", duration = NULL, closeButton = TRUE)
     validate(
-      need(input$dependentVar_r_fi != "", "Please specify a group variable")
+      need(input$dependentVar_r_fi != "", "Please specify a dependent variable")
     )
   }
   if (!(input$dependentVar_r_fi %in% names(rvals$rval_loadeddf) | input$dependentVar_r_fi %in% names(rvals$rval_processeddf))) {
@@ -817,9 +817,9 @@ output_r_fi <- eventReactive(input$compute_r_FiBtn, {
     )
   }
   if (input$dependentVar_r_fi == "") {
-    showNotification(ui = "Please specify a group variable", type = "error", duration = NULL, closeButton = TRUE)
+    showNotification(ui = "Please specify a dependent variable", type = "error", duration = NULL, closeButton = TRUE)
     validate(
-      need(input$dependentVar_r_fi != "", "Please specify a group variable")
+      need(input$dependentVar_r_fi != "", "Please specify a dependent variable")
     )
   }
   if (!(input$dependentVar_r_fi %in% names(rvals$rval_loadeddf) | input$dependentVar_r_fi %in% names(rvals$rval_processeddf))) {
@@ -982,13 +982,13 @@ output$report_r_fi <- downloadHandler(
         # Set up parameters to pass to Rmd document
         params <- list(
           session_info = sessioninfo::session_info()$platform,
-          feature_vars = input$feature_c_fi_variableSelect,
-          dependent_var = input$dependentVar_c_fi,
+          feature_vars = input$feature_r_fi_variableSelect,
+          dependent_var = input$dependentVar_r_fi,
           groups = rvals$groups_lvl,
           warning_data = rvals$data_warn,
           warning_data_n = rvals$data_warn_n,
           fi_method = input$fi_input,
-          fi_model = input$select_c_fimethod,
+          fi_model = input$select_r_fimethod,
           folds_n = input$c_n_folds,
           repeats_n = input$c_n_repeats,
           fi_output = rvals$rval_fi_output,
