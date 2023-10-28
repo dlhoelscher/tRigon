@@ -60,7 +60,7 @@ FLASH-generated pathomics demo files for five human and mouse datasets as well a
 
 If you find tRigon useful, please consider citing the publication:
 
-- [David L. Hölscher, Michael Goedertier, Barbara M. Klinkhammer, Patrick Droste, Ivan G. Costa, Peter Boor, Roman D. Bülow]
+- tRigon: an R package and Shiny App for integrative pathomics analysis [David L. Hölscher, Michael Goedertier, Barbara M. Klinkhammer, Patrick Droste, Ivan G. Costa, Peter Boor, Roman D. Bülow]
 
 ## 6. Further information
 
