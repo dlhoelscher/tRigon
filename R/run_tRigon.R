@@ -18,7 +18,9 @@
 #' @export
 #' @return app
 #' @examples
-#' if(interactive()){}
+#' if(interactive()){
+#' run_tRigon()
+#' }
 
 run_tRigon <- function() {
   appDir <- system.file("app", package = "tRigon")

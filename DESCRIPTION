@@ -2,19 +2,19 @@ Package: tRigon
 Title: Toolbox for Integrative Pathomics Analysis
 Version: 0.3.2
 Authors@R: 
-  c(person(given = "David L.",
+  c(person(given = "David",
            family = "Hoelscher", 
            role = c("aut", "cre"),
            email="dhoelscher@ukaachen.de",
            comment = c(ORCID = "0000-0001-8595-0694")),
-    person(given = "Roman D.",
+    person(given = "Roman",
            family = "Buelow", 
            role = c("ctb"),
            comment = c(ORCID = "0000-0002-8527-7353")),
     person(given = "Michael",
            family = "Goedertier", 
            role = c("ctb")))
-Maintainer: David L. Hoelscher <dhoelscher@ukaachen.de>
+Maintainer: David Hoelscher <dhoelscher@ukaachen.de>
 Description: Processing and analysis of pathomics, omics and other medical datasets.
     'tRigon' serves as a toolbox for descriptive and statistical analysis, correlations, 
     plotting and many other methods for exploratory analysis of high-dimensional datasets.

@@ -27,10 +27,10 @@ tRigon::run_tRigon()
 
 2. **Use the website**
 
-Alternatively, you can access tRigon online via [https://bcdd.shinyapps.io/tRigon/](https://bcdd.shinyapps.io/tRigon/). 
+Alternatively, you can access tRigon online via [https://labooratory.shinyapps.io/tRigon/](https://labooratory.shinyapps.io/tRigon/). 
 
 > **Note** 
-> tRigon is deployed for free at https://www.shinyapps.io. It only allows to use 1024 MB of memory. Therefore, large files can not be uploaded and/or analysed successfully. In this case, please run tRigon locally.
+> tRigon is deployed for free at shinyapps.io. It only allows to use 1024 MB of memory. Therefore, large files can not be uploaded and/or analysed successfully. In this case, please run tRigon locally.
 
 3. **Demo Data**
 

@@ -1,0 +1,12 @@
+name: tRigon
+title: tRigon
+username: labooratory
+account: labooratory
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 10341556
+bundleId: 7864043
+url: https://labooratory.shinyapps.io/tRigon/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE

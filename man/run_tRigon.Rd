@@ -13,7 +13,9 @@ app
 Run tRigon application
 }
 \examples{
-if(interactive()){}
+if(interactive()){
+run_tRigon()
+}
 }
 \author{
 David Hoelscher
