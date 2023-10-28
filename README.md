@@ -1,4 +1,4 @@
-# Welcome to tRigon <img src='https://github.com/dlhoelscher/tRigon/blob/main/www/tRigon_logo.png' align="right" height="150"/>
+# Welcome to tRigon <img src='https://github.com/dlhoelscher/tRigon/tree/master/inst/app/www/tRigon_logo.png' align="right" height="150"/>
 
 ## 1. Introduction
 
