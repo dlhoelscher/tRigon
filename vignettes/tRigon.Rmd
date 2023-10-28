@@ -19,7 +19,7 @@ To facilitate pathomics data analysis and interpretation as well as support a br
 
 ## Installation
 
-Users  need to have the R environment and optionally RStudio installed. You can download both [here](https://posit.co/download/rstudio-desktop/). 
+Users  need to have the R environment and optionally RStudio installed. You can download them [here](https://posit.co/download/rstudio-desktop/). 
 
 Next you can run the following code to install tRigon.
 
@@ -71,7 +71,7 @@ tRigon supports .xlsx and .csv formats as data inputs for processing pathomics f
 
 ## Demo Data
 
-FLASH-generated pathomics demo files for five human and mouse datasets as well as three non-pathomics medical datasets have been provided. Please use this [link to access](https://git-ce.rwth-aachen.de/labooratory-ai/flash/-/blob/main/NGM_DataRepository.zip) the demo data.
+FLASH-generated pathomics demo files for five human and mouse datasets as well as three non-pathomics medical datasets have been provided. Please use this [link to access](https://git-ce.rwth-aachen.de/labooratory-ai/trigon/-/blob/main/demo_data.zip) the demo data.
 
 ## Citation
 

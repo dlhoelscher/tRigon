@@ -16,7 +16,7 @@ tRigon offers several key features:
   
   The use of tRigon is simple and intuitive. Information are available in the README file and you can also follow the extensive user guide in the help tab to perform your analysis. 
 
-Demo files for tRigon can be [downloaded here](https://git-ce.rwth-aachen.de/labooratory-ai/flash/-/blob/main/NGM_DataRepository.zip) in the provided data repository.
+Demo files for tRigon can be [downloaded here](https://git-ce.rwth-aachen.de/labooratory-ai/trigon/-/blob/main/demo_data.zip) in the provided data repository.
 
 Code for our framework for large-scale automated histomorphometry (FLASH) to generate pathomics files can also be [accessed here](https://git-ce.rwth-aachen.de/labooratory-ai/flash)
 

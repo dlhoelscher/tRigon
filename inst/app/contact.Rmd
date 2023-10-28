@@ -9,7 +9,7 @@ To follow our AI and biostatistics-based projects, please visit: [<b><span style
 
 To report bugs and/or request features, please use the following GitLab issue channel: 
   
-[<b><span style="color:#F17F42">https://git-ce.rwth-aachen.de/labooratory-ai/tRigon/-/issues</span></b>](https://git-ce.rwth-aachen.de/labooratory-ai/tRigon/-/issues)
+[<b><span style="color:#F17F42">https://git-ce.rwth-aachen.de/labooratory-ai/tRigon/-/issues</span></b>](https://git-ce.rwth-aachen.de/labooratory-ai/trigon/-/issues)
 
 ------
 # Citation

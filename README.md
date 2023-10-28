@@ -1,4 +1,4 @@
-# Welcome to tRigon <img src='https://github.com/dlhoelscher/aRrow/blob/main/www/tRigon_logo.png' align="right" height="150"/>
+# Welcome to tRigon <img src='https://github.com/dlhoelscher/tRigon/blob/main/www/tRigon_logo.png' align="right" height="150"/>
 
 ## 1. Introduction
 
@@ -34,7 +34,7 @@ Alternatively, you can access tRigon online via [https://labooratory.shinyapps.i
 
 3. **Demo Data**
 
-FLASH-generated pathomics demo files for five human and mouse datasets as well as three non-pathomics medical datasets have been provided. Please use this [link to access](https://git-ce.rwth-aachen.de/labooratory-ai/flash/-/blob/main/NGM_DataRepository.zip) the demo data.
+FLASH-generated pathomics demo files for five human and mouse datasets as well as three non-pathomics medical datasets have been provided. Please use this [link to access](https://git-ce.rwth-aachen.de/labooratory-ai/trigon/-/blob/main/demo_data.zip) the demo data.
 
 ## 4. Main Functions
 
